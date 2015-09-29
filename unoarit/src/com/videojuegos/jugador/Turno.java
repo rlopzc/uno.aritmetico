@@ -384,8 +384,7 @@ public class Turno {
         Vector3 v = m.getMoveVector();
         Carta cc = Juego.centroCarta;
         if (c != null) {
-            if ((c.meEstasTocando(Juego.turno)) || (AtsUtil.machine)
-                    || (AtsUtil.mismoDispositivo)) {
+            if ((c.meEstasTocando(Juego.turno)) || (AtsUtil.machine)  || (AtsUtil.mismoDispositivo)) {
                 if (cc.getRectangle().contains(v)) {
 
                     if (acepta(c)) {
