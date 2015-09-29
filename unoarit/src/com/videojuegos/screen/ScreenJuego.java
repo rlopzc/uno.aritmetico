@@ -65,13 +65,12 @@ public class ScreenJuego implements Screen {
 		batch.enableBlending();
 		batch.begin();
 
-		if ((AtsUtil.mismoDispositivo == false) && (AtsUtil.machine == false)) {
-			if (BluetoothSingleton.getInstance().bluetoothManager
-					.CerrarPartida() == true) {
+		if ((!AtsUtil.mismoDispositivo) && (!AtsUtil.machine)) {
+			if ( BluetoothSingleton.getInstance().bluetoothManager.CerrarPartida() ) {
 				BluetoothSingleton.getInstance().bluetoothManager.stop();
 				AtsUtil.game.setScreen(AtsScreens.screenMain);
 			}
-			if (BluetoothSingleton.getInstance().bluetoothManager.isConnected() == true)
+			if (  BluetoothSingleton.getInstance().bluetoothManager.isConnected()  )
 				batch.draw(Load.good, 1.0f, 1.0f, 1.0f, 1.0f);
 			else
 				AtsUtil.game.setScreen(AtsScreens.screenMain);
@@ -79,7 +78,7 @@ public class ScreenJuego implements Screen {
 
 		try {
 			juego.dibujarJuego(batch);
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 
 		btnAtras.dibujar(batch);
@@ -91,7 +90,7 @@ public class ScreenJuego implements Screen {
 		} else if (btnAtras.meTocaste() && Bluetooth.mismoDispositivo()) {
 			Load.mazo.rellenarMazo(player);
 			AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
-		} else if (btnAtras.meTocaste() && AtsUtil.mismoDispositivo==false && AtsUtil.machine==false && Juego.idMachine==1) {
+		} else if (btnAtras.meTocaste() && !AtsUtil.mismoDispositivo && !AtsUtil.machine && Juego.idMachine==1) {
 			Load.mazo.rellenarMazo(player);
 			BluetoothSingleton.getInstance().bluetoothManager
 					.sendMessage2("Cerrar");

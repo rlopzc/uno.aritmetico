@@ -61,9 +61,13 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 	 * Método para agregar un nuevo turno en la tabla
 	 */
 	public void agregarTurno(DBTurno turno) {
-		String selectQuery = "INSERT INTO " + TABLE_PARTIDA + "(" + KEY_ID_PARTIDA + "," + KEY_TURNO + "," + KEY_JUGADOR + "," + KEY_COLOR + "," + KEY_OPERACION_MAZO + "," + KEY_OPERACION_JUGADA + "," + KEY_VALOR + ") VALUES " + "(" + turno.getIdPartidaDB() + "," + turno.getTurnoDB() + ",'" + turno.getJugadorDB() + "','" + turno.getColorDB() + "','" + turno.getOperacionMazoDB() + "','" + turno.getOperacionJugadaDB() + "','" + turno.getValorDB() + "')";
+		String insertQuery = "INSERT INTO " + TABLE_PARTIDA + "(" +
+				KEY_ID_PARTIDA + "," + KEY_TURNO + "," + KEY_JUGADOR + "," + KEY_COLOR + ","
+				+ KEY_OPERACION_MAZO + "," + KEY_OPERACION_JUGADA + "," + KEY_VALOR + ") VALUES " + "("
+				+ turno.getIdPartidaDB() + "," + turno.getTurnoDB() + ",'" + turno.getJugadorDB() + "','" + turno.getColorDB()
+				+ "','" + turno.getOperacionMazoDB() + "','" + turno.getOperacionJugadaDB() + "','" + turno.getValorDB() + "')";
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.execSQL(selectQuery);
+		db.execSQL(insertQuery);
 	}
 
 	/**
