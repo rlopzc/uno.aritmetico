@@ -1724,3 +1724,16 @@ backgroundsiguienteportrait
   orig: 770, 1236
   offset: 0, 0
   index: -1
+
+fondocartas.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fondocartas
+  rotate: false
+  xy: 2, 2
+  size: 1280, 800
+  orig: 1280, 800
+  offset: 0, 0
+  index: -1
+
