@@ -346,4 +346,8 @@ public class Player {
 		this.puntuacion += 3;
     }
 
+	public int obtenerPuntuacion(){
+		return this.puntuacion;
+	}
+
 }

@@ -33,6 +33,9 @@ public class Juego {
 	public Juego(int numJug) {
 		Juego.numJug = numJug;
 		Juego.turno = 1;
+		Juego.turnoDB = 0;
+		Juego.colorDB = "";
+		Juego.valorDB = "";
 		Juego.idPartidaDB = db.asignarUltimoIdPartida();
 
 		player = new ArrayList<Player>(numJug);
