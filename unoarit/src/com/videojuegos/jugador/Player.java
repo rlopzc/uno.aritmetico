@@ -134,6 +134,7 @@ public class Player {
                 if ((getIndex() + i) < getMazoPlayer().size()) {
                     getMazoPlayer().get(getIndex() + i).setPosicion(
                             getPosX()[i], getAntY());
+                    System.out.println("index ::::" + index);
                 }
             }
         } else {
@@ -323,7 +324,8 @@ public class Player {
      * la une con otra de color en el centro.
      */
     public void sumarPuntosPorColor() {
-		this.puntuacion++;
+        System.out.println("+1 punto");
+        this.puntuacion++;
     }
 
     /**
@@ -333,7 +335,8 @@ public class Player {
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 3+1
      */
     public void sumarPuntosPorOperacionSimple() {
-		this.puntuacion += 2;
+        System.out.println("+2 puntos");
+        this.puntuacion += 2;
     }
 
     /**
@@ -343,7 +346,12 @@ public class Player {
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 8/2
      */
     public void sumarPuntosPorOperacionDoble() {
-		this.puntuacion += 3;
+        System.out.println("+3 puntos");
+        this.puntuacion += 3;
     }
+
+	public int obtenerPuntuacion(){
+		return this.puntuacion;
+	}
 
 }
