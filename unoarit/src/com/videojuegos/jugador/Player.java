@@ -1,7 +1,5 @@
 package com.videojuegos.jugador;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.videojuegos.asset.AtsPos;
 import com.videojuegos.asset.AtsTM;
@@ -9,6 +7,8 @@ import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
 import com.videojuegos.cartas.Carta;
+
+import java.util.ArrayList;
 
 public class Player {
 
@@ -19,6 +19,7 @@ public class Player {
     private ArrayList<Carta> mazoPlayer;
     private Boton btnPlayerAnt, btnPlayerSig;
     private int puntuacion = 0;
+
 
     public Player(int id) {
         this.nombre = "";
@@ -134,7 +135,6 @@ public class Player {
                 if ((getIndex() + i) < getMazoPlayer().size()) {
                     getMazoPlayer().get(getIndex() + i).setPosicion(
                             getPosX()[i], getAntY());
-                    System.out.println("index ::::" + index);
                 }
             }
         } else {
@@ -331,7 +331,7 @@ public class Player {
     /**
      * Método que suma 2 puntos al jugador, se llama cuando una carta de operación del mazo
      * la une con otra del mismo tipo de operación en el centro.
-     *
+     * <p>
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 3+1
      */
     public void sumarPuntosPorOperacionSimple() {
@@ -342,7 +342,7 @@ public class Player {
     /**
      * Método que suma 3 puntos al jugador, se llama cuando una carta de operación del mazo
      * la une con otra de diferente tipo de operación en el centro.
-     *
+     * <p>
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 8/2
      */
     public void sumarPuntosPorOperacionDoble() {
@@ -350,8 +350,7 @@ public class Player {
         this.puntuacion += 3;
     }
 
-	public int obtenerPuntuacion(){
-		return this.puntuacion;
-	}
-
+    public int obtenerPuntuacion() {
+        return this.puntuacion;
+    }
 }

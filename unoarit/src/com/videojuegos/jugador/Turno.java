@@ -1,11 +1,5 @@
 package com.videojuegos.jugador;
 
-import android.graphics.Color;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.badlogic.gdx.math.Vector3;
 import com.videojuegos.asset.AtsPos;
 import com.videojuegos.asset.AtsSound;
@@ -20,6 +14,9 @@ import com.videojuegos.screen.ScreenEligeColor;
 import com.videojuegos.screen.ScreenSiguientePlayer;
 import com.videojuegos.unoarit.MainP;
 import com.videojuegos.utils.BluetoothSingleton;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Turno {
     private static Player p;
@@ -100,21 +97,26 @@ public class Turno {
                     if (cc.getValor() == c.getValor()) {
                         if (c.getOperacion().equals(cc.getOperacion())) {
                             p.sumarPuntosPorOperacionSimple();
+
                         } else {
                             p.sumarPuntosPorOperacionDoble();
+
                         }
                         save("si", cc.getOperacion(), c.getOperacion(), Integer.toString(c.getValor()));
                         return true;
                     } else {
                         p.sumarPuntosPorColor();
+
                         save("si", "", "", "");
                         return true;
                     }
                 } else if (cc.getValor() == c.getValor()) {
                     if (c.getOperacion().equals(cc.getOperacion())) {
                         p.sumarPuntosPorOperacionSimple();
+
                     } else {
                         p.sumarPuntosPorOperacionDoble();
+
                     }
                     save("no", cc.getOperacion(), c.getOperacion(), Integer.toString(c.getValor()));
                     return true;
