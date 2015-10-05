@@ -7,6 +7,7 @@ import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
 import com.videojuegos.cartas.Carta;
+import com.videojuegos.screen.ScreenJuego;
 
 import java.util.ArrayList;
 
@@ -326,7 +327,10 @@ public class Player {
     public void sumarPuntosPorColor() {
         System.out.println("+1 punto");
         this.puntuacion++;
+
+        publicarMarcador();
     }
+
 
     /**
      * Método que suma 2 puntos al jugador, se llama cuando una carta de operación del mazo
@@ -337,6 +341,8 @@ public class Player {
     public void sumarPuntosPorOperacionSimple() {
         System.out.println("+2 puntos");
         this.puntuacion += 2;
+
+        publicarMarcador();
     }
 
     /**
@@ -348,9 +354,40 @@ public class Player {
     public void sumarPuntosPorOperacionDoble() {
         System.out.println("+3 puntos");
         this.puntuacion += 3;
+
+        publicarMarcador();
+
     }
 
     public int obtenerPuntuacion() {
         return this.puntuacion;
+    }
+
+    /**
+     * DEBO MEJORAR ESTE METODO Y TRATAR DE QUE HAYA UN MANAGER, ENTRE ESTA CLASE Y LA DE
+     * SCREEN MAIN.
+     */
+
+    public void publicarMarcador() {
+        //ScreenJuego.crearMarcadorSiNoExiste();
+
+        if (this.getCorreo().equalsIgnoreCase("Maquina")) {
+            ScreenJuego.marcadorJugador2.limpiarTexto();
+            if (this.obtenerPuntuacion() > 9) {
+
+                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
+                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
+            } else
+                ScreenJuego.marcadorJugador2.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
+        } else {
+            ScreenJuego.marcadorJugador1.limpiarTexto();
+            if (this.obtenerPuntuacion() > 9) {
+
+                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
+                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
+            } else
+                ScreenJuego.marcadorJugador1.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
+        }
+
     }
 }

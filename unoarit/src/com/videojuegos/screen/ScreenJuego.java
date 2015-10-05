@@ -1,5 +1,6 @@
 package com.videojuegos.screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.videojuegos.asset.AtsScreens;
@@ -7,6 +8,7 @@ import com.videojuegos.asset.AtsSound;
 import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
+import com.videojuegos.input.InputScreenJuego;
 import com.videojuegos.jugador.Bluetooth;
 import com.videojuegos.jugador.Juego;
 import com.videojuegos.jugador.Player;
@@ -26,12 +28,13 @@ public class ScreenJuego implements Screen {
     private Boton btnAtras;
     private ArrayList<Player> player;
 
-    //Usamos un logger para imprimir en consola.
-    private static final String class_name = ScreenJuego.class.getName();
+    public static InputScreenJuego marcadorJugador1, marcadorJugador2;
 
     public ScreenJuego(int numJug) {
         try {
             juego = new Juego(numJug);
+            crearMarcadorSiNoExiste();
+            iniciarMarcador('0');
         } catch (Exception e) {
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
         }
@@ -100,8 +103,9 @@ public class ScreenJuego implements Screen {
             AtsUtil.game.setScreen(AtsScreens.screenMain);
         }
 
-        //logger.info("Estoy en el scree Juego");
-        //Log.i(class_name, "Estoy en el screen Juego");
+
+        marcadorJugador1.Actualizar();
+        marcadorJugador2.Actualizar();
 
     }
 
@@ -113,6 +117,7 @@ public class ScreenJuego implements Screen {
 
     @Override
     public void show() {
+        //crearMarcadorSiNoExiste();
         dibujar_boton_en_pantalla();
     }
 
@@ -128,6 +133,7 @@ public class ScreenJuego implements Screen {
 
     @Override
     public void resume() {
+        //crearMarcadorSiNoExiste();
         dibujar_boton_en_pantalla();
     }
 
@@ -153,7 +159,27 @@ public class ScreenJuego implements Screen {
                 btnAtras = new Boton(Load.btnatras, 14.2f, 9.4f, 1.0f, 0.7f, 90);
             }
         }
+
+
     }
+
+    public static void crearMarcadorSiNoExiste() {
+        if (marcadorJugador1 == null) {
+            ScreenJuego.marcadorJugador1 = new InputScreenJuego(AtsUtil.batch, 2.0f, 1.474f);
+            Gdx.input.setInputProcessor(marcadorJugador1);
+
+        }
+        if (marcadorJugador2 == null) {
+            ScreenJuego.marcadorJugador2 = new InputScreenJuego(AtsUtil.batch, 13.0f, 8.5f);
+            Gdx.input.setInputProcessor(marcadorJugador2);
+        }
+    }
+
+    public static void iniciarMarcador(char marcador) {
+        marcadorJugador1.llenar_texto(marcador);
+        marcadorJugador2.llenar_texto(marcador);
+    }
+
 
     @Override
     public void dispose() {

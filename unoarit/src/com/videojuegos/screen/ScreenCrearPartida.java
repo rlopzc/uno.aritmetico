@@ -87,9 +87,6 @@ public class ScreenCrearPartida implements Screen {
                 AtsScreens.screenJuego = new ScreenJuego(BluetoothSingleton.getInstance().bluetoothManager.Jugadores().size());
                 BluetoothSingleton.getInstance().bluetoothManager.ChangetoClose();
                 AtsUtil.game.setScreen(AtsScreens.screenJuego);
-            } else {
-
-
             }
 
         }
@@ -112,10 +109,9 @@ public class ScreenCrearPartida implements Screen {
         /**
          * Metodo  que se encarga de actualizar la lista de los jugadores unidos a la partida
          */
-        if (BluetoothSingleton.getInstance().bluetoothManager.Jugadores() == null) {
-
-        } else
+        if (BluetoothSingleton.getInstance().bluetoothManager.Jugadores() != null) {
             lista.Asignar(BluetoothSingleton.getInstance().bluetoothManager.Jugadores());
+        }
     }
 
     @Override

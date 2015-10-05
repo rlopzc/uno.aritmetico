@@ -74,7 +74,12 @@ public class InputScreenJuego implements InputProcessor {
     }
 
     public void llenar_texto(char caracter) {
+
         texto.add(caracter);
+    }
+
+    public void limpiarTexto() {
+        texto.clear();
     }
 
     @Override
@@ -129,9 +134,7 @@ public class InputScreenJuego implements InputProcessor {
         @SuppressWarnings("unused")
         PintarLetra prueba;
         float respaldo = this.x;
-        if (texto.size() == 0) {
-
-        } else {
+        if (texto.size() != 0) {
             for (int i = 0; i < texto.size(); i++) {
                 switch (texto.get(i)) {
                     case '0':
