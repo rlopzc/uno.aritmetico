@@ -125,8 +125,9 @@ public class Turno {
                 return true;
             }
 
-            if (p.getCorreo() == "Maquina")
-                return true;
+//            if (p.getCorreo() == "Maquina")
+//                return true;
+            return p.getCorreo().equalsIgnoreCase("Maquina"); //return true.
         }
         return false;
     }

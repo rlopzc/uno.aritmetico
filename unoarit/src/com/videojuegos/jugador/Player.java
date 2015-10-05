@@ -365,7 +365,7 @@ public class Player {
 
     /**
      * DEBO MEJORAR ESTE METODO Y TRATAR DE QUE HAYA UN MANAGER, ENTRE ESTA CLASE Y LA DE
-     * SCREEN MAIN.
+     * SCREEN JUEGO.
      */
 
     public void publicarMarcador() {
