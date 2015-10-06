@@ -120,13 +120,13 @@ public class Turno {
                     return true;
                 }
             } else if (cc.getValor() == c.getValor()) {
+                p.sumarPuntosPorColor();
                 return true;
             } else if ((c.getColor() == DataCarta.neg) || (cc.getColorComodin() == c.getColor())) {
+
                 return true;
             }
 
-//            if (p.getCorreo() == "Maquina")
-//                return true;
             return p.getCorreo().equalsIgnoreCase("Maquina"); //return true.
         }
         return false;
