@@ -28,12 +28,12 @@ public class ScreenJuego implements Screen {
     private Boton btnAtras;
     private ArrayList<Player> player;
 
-    public static InputScreenJuego marcadorJugador1, marcadorJugador2;
+    public static InputScreenJuego marcadorJugador1, marcadorJugador2, marcadorJugador3, marcadorJugador4;
 
     public ScreenJuego(int numJug) {
         try {
             juego = new Juego(numJug);
-            crearMarcadorSiNoExiste();
+            crearMarcadorSiNoExiste(numJug);
             iniciarMarcador('0');
         } catch (Exception e) {
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
@@ -92,20 +92,26 @@ public class ScreenJuego implements Screen {
         if (btnAtras.meTocaste() && Bluetooth.machine()) {
             Load.mazo.rellenarMazo(player);
             AtsUtil.game.setScreen(AtsScreens.screenMain);
+            iniciarMarcador('0');
         } else if (btnAtras.meTocaste() && Bluetooth.mismoDispositivo()) {
             Load.mazo.rellenarMazo(player);
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
+            iniciarMarcador('0');
         } else if (btnAtras.meTocaste() && !AtsUtil.mismoDispositivo && !AtsUtil.machine && Juego.idMachine == 1) {
             Load.mazo.rellenarMazo(player);
             BluetoothSingleton.getInstance().bluetoothManager
                     .sendMessage2("Cerrar");
             BluetoothSingleton.getInstance().bluetoothManager.stop();
             AtsUtil.game.setScreen(AtsScreens.screenMain);
+
+            iniciarMarcador('0');
         }
 
 
         marcadorJugador1.Actualizar();
         marcadorJugador2.Actualizar();
+        marcadorJugador3.Actualizar();
+        marcadorJugador4.Actualizar();
 
     }
 
@@ -123,6 +129,7 @@ public class ScreenJuego implements Screen {
 
     @Override
     public void hide() {
+
 
     }
 
@@ -163,21 +170,48 @@ public class ScreenJuego implements Screen {
 
     }
 
-    public static void crearMarcadorSiNoExiste() {
-        if (marcadorJugador1 == null) {
-            ScreenJuego.marcadorJugador1 = new InputScreenJuego(AtsUtil.batch, 2.0f, 1.474f);
-            Gdx.input.setInputProcessor(marcadorJugador1);
+    public static void crearMarcadorSiNoExiste(int numMarcadoresNecesarios) {
+        marcadorJugador1 = new InputScreenJuego(AtsUtil.batch, 5.0f, 3.474f);
+        Gdx.input.setInputProcessor(marcadorJugador1);
 
-        }
-        if (marcadorJugador2 == null) {
-            ScreenJuego.marcadorJugador2 = new InputScreenJuego(AtsUtil.batch, 13.0f, 8.5f);
-            Gdx.input.setInputProcessor(marcadorJugador2);
+
+        marcadorJugador2 = new InputScreenJuego(AtsUtil.batch, 10.0f, 5.5f);
+        Gdx.input.setInputProcessor(marcadorJugador2);
+
+        if (numMarcadoresNecesarios > 2) {//jugaran 3
+            marcadorJugador3 = new InputScreenJuego(AtsUtil.batch, 4.0f, 5.0f);
+            Gdx.input.setInputProcessor(marcadorJugador3);
+            System.out.println("Num Jugadores: " + numMarcadoresNecesarios);
+
+            if (numMarcadoresNecesarios > 3) {//jugaran 4.
+                marcadorJugador4 = new InputScreenJuego(AtsUtil.batch, 9.0f, 5.0f);
+                Gdx.input.setInputProcessor(marcadorJugador4);
+            }
         }
     }
 
-    public static void iniciarMarcador(char marcador) {
-        marcadorJugador1.llenar_texto(marcador);
-        marcadorJugador2.llenar_texto(marcador);
+    public static void iniciarMarcador(char puntuacion) {
+        dibujarMarcadores(marcadorJugador1, puntuacion);
+        dibujarMarcadores(marcadorJugador2, puntuacion);
+        dibujarMarcadores(marcadorJugador3, puntuacion);
+        dibujarMarcadores(marcadorJugador4, puntuacion);
+    }
+
+    private static void dibujarMarcadores(InputScreenJuego marcadorJugador, char puntuacion) {
+        if (marcadorJugador != null) {
+            marcadorJugador.limpiarTexto();
+            marcadorJugador.llenar_texto(puntuacion);
+        }
+    }
+
+    public static void actualizarMarcador(InputScreenJuego marcadorJugador, int puntuacion) {
+        marcadorJugador.limpiarTexto();
+
+        if (puntuacion > 9) {
+            marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(0));//Primer digito
+            marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(1));//Segundo digito.
+        } else
+            marcadorJugador.llenar_texto((char) ('0' + puntuacion));
     }
 
 

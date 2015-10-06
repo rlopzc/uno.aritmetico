@@ -7,7 +7,6 @@ import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
 import com.videojuegos.cartas.Carta;
-import com.videojuegos.input.InputScreenJuego;
 import com.videojuegos.screen.ScreenJuego;
 
 import java.util.ArrayList;
@@ -365,36 +364,20 @@ public class Player {
     }
 
     /**
-     * DEBO MEJORAR ESTE METODO Y TRATAR DE QUE HAYA UN MANAGER, ENTRE ESTA CLASE Y LA DE
-     * SCREEN JUEGO.
+     * Metodo que se encarga de pintar el marcador en la pantalla.
      */
 
     public void publicarMarcador() {
         //ScreenJuego.crearMarcadorSiNoExiste();
 
-        if (this.getCorreo().equalsIgnoreCase("Maquina")) {
-            ScreenJuego.marcadorJugador2.limpiarTexto();
-            if (this.obtenerPuntuacion() > 9) {
+        if (this.getCorreo().equalsIgnoreCase("Maquina") || this.getCorreo().equalsIgnoreCase("Player 2"))
+            ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador2, this.obtenerPuntuacion());
+        else if (this.getCorreo().equalsIgnoreCase("Player 1"))
+            ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador1, this.obtenerPuntuacion());
+        else if (this.getCorreo().equalsIgnoreCase("Player 3"))
+            ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador3, this.obtenerPuntuacion());
+        else
+            ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador4, this.obtenerPuntuacion());
 
-                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
-                actualizar_marcador(ScreenJuego.marcadorJugador2, Integer.toString(this.obtenerPuntuacion()).charAt(0));
-                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
-            } else
-                ScreenJuego.marcadorJugador2.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
-        } else {
-            ScreenJuego.marcadorJugador1.limpiarTexto();
-            if (this.obtenerPuntuacion() > 9) {
-
-                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
-                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
-            } else
-                ScreenJuego.marcadorJugador1.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
-        }
     }
-
-    private void actualizar_marcador(InputScreenJuego marcadorJugador, char num) {
-        marcadorJugador.llenar_texto(num);
-    }
-
-
 }
