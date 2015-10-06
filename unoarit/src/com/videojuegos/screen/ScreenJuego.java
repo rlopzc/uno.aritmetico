@@ -92,11 +92,11 @@ public class ScreenJuego implements Screen {
         if (btnAtras.meTocaste() && Bluetooth.machine()) {
             Load.mazo.rellenarMazo(player);
             AtsUtil.game.setScreen(AtsScreens.screenMain);
-            iniciarMarcador('0');
+            destruirMarcadores();
         } else if (btnAtras.meTocaste() && Bluetooth.mismoDispositivo()) {
             Load.mazo.rellenarMazo(player);
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
-            iniciarMarcador('0');
+            destruirMarcadores();
         } else if (btnAtras.meTocaste() && !AtsUtil.mismoDispositivo && !AtsUtil.machine && Juego.idMachine == 1) {
             Load.mazo.rellenarMazo(player);
             BluetoothSingleton.getInstance().bluetoothManager
@@ -104,14 +104,13 @@ public class ScreenJuego implements Screen {
             BluetoothSingleton.getInstance().bluetoothManager.stop();
             AtsUtil.game.setScreen(AtsScreens.screenMain);
 
-            iniciarMarcador('0');
+            destruirMarcadores();
         }
 
-
-        marcadorJugador1.Actualizar();
-        marcadorJugador2.Actualizar();
-        marcadorJugador3.Actualizar();
-        marcadorJugador4.Actualizar();
+        if (marcadorJugador1 != null) marcadorJugador1.Actualizar();
+        if (marcadorJugador2 != null) marcadorJugador2.Actualizar();
+        if (marcadorJugador3 != null) marcadorJugador3.Actualizar();
+        if (marcadorJugador4 != null) marcadorJugador4.Actualizar();
 
     }
 
@@ -170,23 +169,45 @@ public class ScreenJuego implements Screen {
     }
 
     public static void crearMarcadorSiNoExiste(int numMarcadoresNecesarios) {
-        marcadorJugador1 = new InputScreenJuego(AtsUtil.batch, 5.0f, 3.474f);
-        Gdx.input.setInputProcessor(marcadorJugador1);
+        if (marcadorJugador1 == null) {
 
+            marcadorJugador1 = new InputScreenJuego(AtsUtil.batch, 7.5f, 3f);
+            Gdx.input.setInputProcessor(marcadorJugador1);
+        }
 
-        marcadorJugador2 = new InputScreenJuego(AtsUtil.batch, 10.0f, 5.5f);
-        Gdx.input.setInputProcessor(marcadorJugador2);
+        if (marcadorJugador2 == null) {
+            marcadorJugador2 = new InputScreenJuego(AtsUtil.batch, 7.6f, 7.3f);
+            Gdx.input.setInputProcessor(marcadorJugador2);
+            marcadorJugador2.setGradosRotacion(180);
+        }
+
 
         if (numMarcadoresNecesarios > 2) {//jugaran 3
-            marcadorJugador3 = new InputScreenJuego(AtsUtil.batch, 4.0f, 5.0f);
-            Gdx.input.setInputProcessor(marcadorJugador3);
-            System.out.println("Num Jugadores: " + numMarcadoresNecesarios);
+            if (marcadorJugador3 == null) {
+                marcadorJugador3 = new InputScreenJuego(AtsUtil.batch, 5.5f, 5.0f);
+                Gdx.input.setInputProcessor(marcadorJugador3);
+                marcadorJugador3.setRotarPosicion(true);
+                marcadorJugador3.setGradosRotacion(270);
+            }
 
             if (numMarcadoresNecesarios > 3) {//jugaran 4.
-                marcadorJugador4 = new InputScreenJuego(AtsUtil.batch, 9.0f, 5.0f);
-                Gdx.input.setInputProcessor(marcadorJugador4);
+                if (marcadorJugador4 == null) {
+
+                    marcadorJugador4 = new InputScreenJuego(AtsUtil.batch, 9.5f, 5.0f);
+                    Gdx.input.setInputProcessor(marcadorJugador4);
+                    marcadorJugador4.setRotarPosicion(true);
+                    marcadorJugador4.setGradosRotacion(90);
+                }
+
             }
         }
+    }
+
+    public static void destruirMarcadores() {
+        marcadorJugador1 = null;
+        marcadorJugador2 = null;
+        marcadorJugador3 = null;
+        marcadorJugador4 = null;
     }
 
     public static void iniciarMarcador(char puntuacion) {

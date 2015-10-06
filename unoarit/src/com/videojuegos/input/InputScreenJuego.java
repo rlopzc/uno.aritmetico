@@ -21,12 +21,16 @@ public class InputScreenJuego implements InputProcessor {
     public float y;
     public float ancho;
     public float alto;
+    private boolean rotarPosicion;
+    private float gradosRotacion;
 
     public InputScreenJuego(SpriteBatch batch, float x, float y) {
         this.x = x;
         this.y = y;
         this.spritebatch = batch;
         texto = new ArrayList<Character>();
+        setRotarPosicion(false);
+        setGradosRotacion(0);
     }
 
     @Override
@@ -138,43 +142,78 @@ public class InputScreenJuego implements InputProcessor {
             for (int i = 0; i < texto.size(); i++) {
                 switch (texto.get(i)) {
                     case '0':
-                        prueba = new PintarLetra(this.spritebatch, Load.cero, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+
+
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.cero, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.cero, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+
                         respaldo += AtsPos.anchoNumero;
+
                         break;
                     case '1':
-                        prueba = new PintarLetra(this.spritebatch, Load.uno, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.uno, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.uno, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case '2':
-                        prueba = new PintarLetra(this.spritebatch, Load.dos, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.dos, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.dos, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
+
                         break;
                     case '3':
-                        prueba = new PintarLetra(this.spritebatch, Load.tres, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.tres, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.tres, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case '4':
-                        prueba = new PintarLetra(this.spritebatch, Load.cuatro, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.cuatro, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.cuatro, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case '5':
-                        prueba = new PintarLetra(this.spritebatch, Load.cinco, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.cinco, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.cinco, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case '6':
-                        prueba = new PintarLetra(this.spritebatch, Load.seis, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.seis, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.seis, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case '7':
-                        prueba = new PintarLetra(this.spritebatch, Load.siete, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.siete, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.siete, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case '8':
-                        prueba = new PintarLetra(this.spritebatch, Load.ocho, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.ocho, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.ocho, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case '9':
-                        prueba = new PintarLetra(this.spritebatch, Load.nueve, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
+                        if (rotarPosicion)
+                            prueba = new PintarLetra(this.spritebatch, Load.nueve, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
+                        else
+                            prueba = new PintarLetra(this.spritebatch, Load.nueve, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero);
                         respaldo += AtsPos.anchoNumero;
                         break;
                     case 'a':
@@ -293,4 +332,19 @@ public class InputScreenJuego implements InputProcessor {
         }
     }
 
+    public boolean isRotarPosicion() {
+        return rotarPosicion;
+    }
+
+    public void setRotarPosicion(boolean rotarPosicion) {
+        this.rotarPosicion = rotarPosicion;
+    }
+
+    public float getGradosRotacion() {
+        return gradosRotacion;
+    }
+
+    public void setGradosRotacion(float gradosRotacion) {
+        this.gradosRotacion = gradosRotacion;
+    }
 }
