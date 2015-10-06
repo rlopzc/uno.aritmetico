@@ -110,8 +110,10 @@ public class ScreenJuego implements Screen {
 
         marcadorJugador1.Actualizar();
         marcadorJugador2.Actualizar();
-        marcadorJugador3.Actualizar();
-        marcadorJugador4.Actualizar();
+        if (marcadorJugador3 != null)
+            marcadorJugador3.Actualizar();
+        if (marcadorJugador4 != null)
+            marcadorJugador4.Actualizar();
 
     }
 
