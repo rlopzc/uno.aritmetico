@@ -1,14 +1,15 @@
 package com.videojuegos.asset;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.videojuegos.cartas.Carta;
 import com.videojuegos.cartas.Mazo;
 import com.videojuegos.input.Letra;
+
+import java.util.ArrayList;
 
 public class Load {
 	// atlas
@@ -94,15 +95,23 @@ public class Load {
 		AtsUtil.load(game);
 		AtsSound.load();
 		AtsScreens.load();
+
+		//Debido a que la imagen "fondocartas.png" no es de tamaño 1280x800, se agrega la linea de abajo
+		//para que renderice el tamaño puesto en el atlas.
+		Texture.setEnforcePotImages(false);
+
 		// Creamos el atlas
 		atlas = new TextureAtlas(Gdx.files.internal("assets/atlas.atlas"));
-		//letrasnumeros = new TextureAtlas(Gdx.files.internal("assets/letrasnumeros.atlas"));
+
 		// Creamos un ArrayList donde se guardaran las cartas
 		mazo = new Mazo();
+
 		// Cargamos el logo
 		logo = atlas.createSprite("logo");
+
 		// Cargamos el mazo
 		mazoS = atlas.createSprite("mazo");
+
 		// cargamos los fondos
 		backgroundayuda = atlas.createSprite("backgroundayuda");
 		backgroundplay1 = atlas.createSprite("backgroundplay1");
@@ -110,7 +119,13 @@ public class Load {
 		backgroundplay3 = atlas.createSprite("backgroundplay3");
 		backgroundmain = atlas.createSprite("backgroundmain2");
 		backgroundnumplayers = atlas.createSprite("backgroundnumplayers");
-		backgroundeligecolor = atlas.createSprite("backgroundeligecolor");
+
+
+		//Hemos creado otro fondo para cuando se quiera escoger una carta, al haber tirado un "comodin" en el juego:
+		//backgroundeligecolor = atlas.createSprite("backgroundeligecolor");
+		backgroundeligecolor = atlas.createSprite("fondocartas");
+
+
 		backgroundganaste = atlas.createSprite("backgroundganaste");
 		backgroundperdiste = atlas.createSprite("backgroundperdiste");
 		backgroundsiguientelandscape = atlas.createSprite("backgroundsiguientelandscape");
@@ -130,8 +145,15 @@ public class Load {
 		//Cargamos el mazo
 		mazo.cargarMazo(atlas);
 		mazo.setCartasId();
+
+
+		/*AQUI CARGA LAS CARTAS PARA ELEGIR COLOR */
+		//LAS CARTAS BASE HAN SIDO MODIFICADAS PARA QUE SOLO SEAN 5:
+		//AMARILLO, ROJO, VERDE, MORADO Y AZUL.
 		cartasBase = mazo.getCartasBase();
+
 		help = mazo.cargarCartasAyuda();
+
 		// Cargamos titulos
 		correctoporcolor = atlas.createSprite("correctoporcolor");
 		correctoporresultado = atlas.createSprite("correctoporresultado");

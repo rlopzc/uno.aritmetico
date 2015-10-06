@@ -1,7 +1,5 @@
 package com.videojuegos.jugador;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.videojuegos.asset.AtsPos;
 import com.videojuegos.asset.AtsTM;
@@ -9,6 +7,10 @@ import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
 import com.videojuegos.cartas.Carta;
+import com.videojuegos.input.InputScreenJuego;
+import com.videojuegos.screen.ScreenJuego;
+
+import java.util.ArrayList;
 
 public class Player {
 
@@ -19,6 +21,7 @@ public class Player {
     private ArrayList<Carta> mazoPlayer;
     private Boton btnPlayerAnt, btnPlayerSig;
     private int puntuacion = 0;
+
 
     public Player(int id) {
         this.nombre = "";
@@ -325,32 +328,73 @@ public class Player {
     public void sumarPuntosPorColor() {
         System.out.println("+1 punto");
         this.puntuacion++;
+
+        publicarMarcador();
     }
+
 
     /**
      * Método que suma 2 puntos al jugador, se llama cuando una carta de operación del mazo
      * la une con otra del mismo tipo de operación en el centro.
-     *
+     * <p>
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 3+1
      */
     public void sumarPuntosPorOperacionSimple() {
         System.out.println("+2 puntos");
         this.puntuacion += 2;
+
+        publicarMarcador();
     }
 
     /**
      * Método que suma 3 puntos al jugador, se llama cuando una carta de operación del mazo
      * la une con otra de diferente tipo de operación en el centro.
-     *
+     * <p>
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 8/2
      */
     public void sumarPuntosPorOperacionDoble() {
         System.out.println("+3 puntos");
         this.puntuacion += 3;
+
+        publicarMarcador();
+
     }
 
-	public int obtenerPuntuacion(){
-		return this.puntuacion;
-	}
+    public int obtenerPuntuacion() {
+        return this.puntuacion;
+    }
+
+    /**
+     * DEBO MEJORAR ESTE METODO Y TRATAR DE QUE HAYA UN MANAGER, ENTRE ESTA CLASE Y LA DE
+     * SCREEN JUEGO.
+     */
+
+    public void publicarMarcador() {
+        //ScreenJuego.crearMarcadorSiNoExiste();
+
+        if (this.getCorreo().equalsIgnoreCase("Maquina")) {
+            ScreenJuego.marcadorJugador2.limpiarTexto();
+            if (this.obtenerPuntuacion() > 9) {
+
+                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
+                actualizar_marcador(ScreenJuego.marcadorJugador2, Integer.toString(this.obtenerPuntuacion()).charAt(0));
+                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
+            } else
+                ScreenJuego.marcadorJugador2.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
+        } else {
+            ScreenJuego.marcadorJugador1.limpiarTexto();
+            if (this.obtenerPuntuacion() > 9) {
+
+                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
+                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
+            } else
+                ScreenJuego.marcadorJugador1.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
+        }
+    }
+
+    private void actualizar_marcador(InputScreenJuego marcadorJugador, char num) {
+        marcadorJugador.llenar_texto(num);
+    }
+
 
 }

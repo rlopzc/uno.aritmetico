@@ -1,12 +1,12 @@
 package com.videojuegos.cartas;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.videojuegos.asset.DataCarta;
 import com.videojuegos.asset.Load;
 import com.videojuegos.jugador.Juego;
 import com.videojuegos.jugador.Player;
+
+import java.util.ArrayList;
 
 public class Mazo {
 	// ArrayList que contiene las cartas
@@ -19,22 +19,23 @@ public class Mazo {
 
 	public Mazo() {
 		mazo = new ArrayList<Carta>();
-		eligeColor = new Carta[10];
-		cartasAyuda = new ArrayList<Carta>();
+        eligeColor = new Carta[5];
+        cartasAyuda = new ArrayList<Carta>();
 	}
 
 	public void cargarMazo(TextureAtlas atlas) {
-//		cargarCartasAMBA(atlas);
 		cargarCartasAMFU(atlas);
+        cargarCartasAZFU(atlas);
+        cargarCartasMO(atlas);
+        cargarCartasROJ(atlas);
+        cargarCartasVEFU(atlas);
+        cargarCartasCOMODIN(atlas);
+
 //		cargarCartasAZBA(atlas);
-		cargarCartasAZFU(atlas);
-		cargarCartasMO(atlas);
+//		cargarCartasAMBA(atlas);
 //		cargarCartasNA(atlas);
-		cargarCartasROJ(atlas);
 //		cargarCartasROS(atlas);
 //		cargarCartasVEBA(atlas);
-		cargarCartasVEFU(atlas);
-		cargarCartasCOMODIN(atlas);
 	}
 	
 	public void setCartasId(){
@@ -43,27 +44,22 @@ public class Mazo {
 		}
 	}
 
-	private void cargarCartasBase() {
-//		eligeColor[0] = new Carta(Load.atlas, DataCarta.ambaBase,
-//				DataCarta.amba, DataCarta.cBase, DataCarta.sinOperacion);
-		eligeColor[1] = new Carta(Load.atlas, DataCarta.amfuBase,
-				DataCarta.amfu, DataCarta.cBase, DataCarta.sinOperacion);
-//		eligeColor[2] = new Carta(Load.atlas, DataCarta.azbaBase,
-//				DataCarta.azba, DataCarta.cBase, DataCarta.sinOperacion);
-		eligeColor[3] = new Carta(Load.atlas, DataCarta.azfuBase,
-				DataCarta.azfu, DataCarta.cBase, DataCarta.sinOperacion);
-		eligeColor[4] = new Carta(Load.atlas, DataCarta.morBase, DataCarta.mo,
-				DataCarta.cBase, DataCarta.sinOperacion);
-//		eligeColor[5] = new Carta(Load.atlas, DataCarta.narBase, DataCarta.na,
-//				DataCarta.cBase, DataCarta.sinOperacion);
-		eligeColor[6] = new Carta(Load.atlas, DataCarta.rojBase, DataCarta.roj,
-				DataCarta.cBase, DataCarta.sinOperacion);
-//		eligeColor[7] = new Carta(Load.atlas, DataCarta.vebaBase,
-//				DataCarta.veba, DataCarta.cBase, DataCarta.sinOperacion);
-		eligeColor[8] = new Carta(Load.atlas, DataCarta.vefuBase,
-				DataCarta.vefu, DataCarta.cBase, DataCarta.sinOperacion);
-//		eligeColor[9] = new Carta(Load.atlas, DataCarta.rosBase, DataCarta.ros,
-//				DataCarta.cBase, DataCarta.sinOperacion);
+    /**
+     * ESTE METODO INICIALIZA LA INFORMACION DE LAS CARTAS DE COLOR: ROJO, AMARILLO, VERDE, AZUL Y MORADO
+     * LOS CUALES SON LLAMADOS "CARTAS BASE".
+     * SI QUISIERAMOS AGREGAS MAS COLORES, DEBERIAMOS AUMENTAR EL TAMAÑO DEL ARREGLO EN EL CONSTRUCTOR DE ESTA CLASE
+     * Y AGREGAS MAS LINEAS (IGUALES), AL FINAL DE ESTE METODO.
+     * <p>
+     * ESTE METODO TOMA EN CONSIDERACION, QUE LAS VARIABLES COMO amfubase, HAN SIDO CREADAS EN LA CLASE "DataCarta".
+     */
+    private void cargarCartasBase() {
+
+        eligeColor[0] = new Carta(Load.atlas, DataCarta.amfuBase, DataCarta.amfu, DataCarta.cBase, DataCarta.sinOperacion);
+        eligeColor[1] = new Carta(Load.atlas, DataCarta.azfuBase, DataCarta.azfu, DataCarta.cBase, DataCarta.sinOperacion);
+        eligeColor[2] = new Carta(Load.atlas, DataCarta.morBase, DataCarta.mo, DataCarta.cBase, DataCarta.sinOperacion);
+        eligeColor[3] = new Carta(Load.atlas, DataCarta.rojBase, DataCarta.roj, DataCarta.cBase, DataCarta.sinOperacion);
+        eligeColor[4] = new Carta(Load.atlas, DataCarta.vefuBase, DataCarta.vefu, DataCarta.cBase, DataCarta.sinOperacion);
+
 	}
 
 	public ArrayList<Carta> cargarCartasAyuda(){
