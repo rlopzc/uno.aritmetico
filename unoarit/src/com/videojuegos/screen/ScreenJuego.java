@@ -64,7 +64,7 @@ public class ScreenJuego implements Screen {
         AtsUtil.limpiarP();
         batch.disableBlending();
         batch.begin();
-        batch.draw(Load.backgroundplay1, 0, 0, 15, 10);
+        batch.draw(AtsUtil.getBackground(), 0, 0, 15, 10);
         batch.end();
 
         batch.enableBlending();
@@ -129,7 +129,6 @@ public class ScreenJuego implements Screen {
 
     @Override
     public void hide() {
-
 
     }
 

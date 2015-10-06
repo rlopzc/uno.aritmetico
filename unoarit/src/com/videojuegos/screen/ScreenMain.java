@@ -55,7 +55,7 @@ public class ScreenMain implements Screen {
 			AtsUtil.machine = true;
 			AtsUtil.mismoDispositivo = false;
 			listener = new AtsInputListener();
-//			Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
+			AtsUtil.setBackground(Load.backgroundplay1);
 			AtsScreens.screenJuego = new ScreenJuego(2);
 			AtsUtil.game.setScreen(AtsScreens.screenJuego);
 			return;
