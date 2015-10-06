@@ -7,6 +7,7 @@ import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
 import com.videojuegos.cartas.Carta;
+import com.videojuegos.input.InputScreenJuego;
 import com.videojuegos.screen.ScreenJuego;
 
 import java.util.ArrayList;
@@ -376,6 +377,7 @@ public class Player {
             if (this.obtenerPuntuacion() > 9) {
 
                 ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
+                actualizar_marcador(ScreenJuego.marcadorJugador2, Integer.toString(this.obtenerPuntuacion()).charAt(0));
                 ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
             } else
                 ScreenJuego.marcadorJugador2.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
@@ -388,6 +390,11 @@ public class Player {
             } else
                 ScreenJuego.marcadorJugador1.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
         }
-
     }
+
+    private void actualizar_marcador(InputScreenJuego marcadorJugador, char num) {
+        marcadorJugador.llenar_texto(num);
+    }
+
+
 }
