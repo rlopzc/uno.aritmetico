@@ -178,6 +178,7 @@ public class ScreenJuego implements Screen {
         if (marcadorJugador2 == null) {
             marcadorJugador2 = new InputScreenJuego(AtsUtil.batch, 7.6f, 7.3f);
             Gdx.input.setInputProcessor(marcadorJugador2);
+            marcadorJugador2.setRotarPosicion(true);
             marcadorJugador2.setGradosRotacion(180);
         }
 
