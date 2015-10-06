@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
@@ -23,6 +24,9 @@ public class AtsUtil {
 	// Nuestro Batcher
 	public static SpriteBatch batch;
 
+	//Cargamos el background que se utilizará
+	public static Sprite background;
+
 	// Para crear un atlas de texturas
 	public static void crearAtlas() {
 		Settings settings = new Settings();
@@ -34,11 +38,11 @@ public class AtsUtil {
 		// PACK_FILE_NAME);
 		TexturePacker2.process(settings, "imagenes", "assets", "atlas");
 	}
-	
+
 	/**
 	 * Limpia la pantalla
 	  */
-	
+
 	public static void limpiarP(){
 		gl.glClearColor(0, 0, 0, 0);
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -58,6 +62,14 @@ public class AtsUtil {
 		batch = new SpriteBatch();
 		//Nuestro gl10
 		gl = Gdx.gl10;
+	}
+
+	public static Sprite getBackground() {
+		return background;
+	}
+
+	public static void setBackground(Sprite background) {
+		AtsUtil.background = background;
 	}
 
 }

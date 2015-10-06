@@ -1737,3 +1737,41 @@ fondocartas
   offset: 0, 0
   index: -1
 
+background2Players.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+background2Players
+  rotate: false
+  xy: 2, 2
+  size: 1280, 800
+  orig: 1280, 800
+  offset: 0, 0
+  index: -1
+
+background3Players.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+background3Players
+  rotate: false
+  xy: 2, 2
+  size: 1280, 800
+  orig: 1280, 800
+  offset: 0, 0
+  index: -1
+
+background4Players.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+background4Players
+  rotate: false
+  xy: 2, 2
+  size: 1280, 800
+  orig: 1280, 800
+  offset: 0, 0
+  index: -1
+
+
+

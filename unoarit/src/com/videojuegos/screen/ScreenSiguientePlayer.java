@@ -34,8 +34,9 @@ public class ScreenSiguientePlayer implements Screen {
 		
 		batch.disableBlending();
 		batch.begin();
-		batch.draw(Load.backgroundplay1, 0, 0, 15, 10);
-		batch.end();
+
+        batch.draw(AtsUtil.getBackground(), 0, 0, 15, 10);
+        batch.end();
 		
 		batch.enableBlending();
 		batch.begin();

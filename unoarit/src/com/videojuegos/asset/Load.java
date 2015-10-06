@@ -26,6 +26,7 @@ public class Load {
     public static Sprite backgroundplay1;
 	public static Sprite backgroundplay2;
 	public static Sprite backgroundplay3;
+	public static Sprite backgroundplay4;
 	public static Sprite backgroundmain;
 	public static Sprite backgroundnumplayers;
 	public static Sprite backgroundeligecolor;
@@ -114,9 +115,10 @@ public class Load {
 
 		// cargamos los fondos
 		backgroundayuda = atlas.createSprite("backgroundayuda");
-		backgroundplay1 = atlas.createSprite("backgroundplay1");
-		backgroundplay2 = atlas.createSprite("backgroundplay2");
-		backgroundplay3 = atlas.createSprite("backgroundplay3");
+		backgroundplay1 = atlas.createSprite("background2Players");
+		backgroundplay2 = atlas.createSprite("background2Players");
+		backgroundplay3 = atlas.createSprite("background3Players");
+		backgroundplay4 = atlas.createSprite("background4Players");
 		backgroundmain = atlas.createSprite("backgroundmain2");
 		backgroundnumplayers = atlas.createSprite("backgroundnumplayers");
 
