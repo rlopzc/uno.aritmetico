@@ -92,15 +92,19 @@ public class ScreenJuego implements Screen {
         if (btnAtras.meTocaste() && Bluetooth.machine()) {
             Load.mazo.rellenarMazo(player);
             AtsUtil.game.setScreen(AtsScreens.screenMain);
+            iniciarMarcador('0');
         } else if (btnAtras.meTocaste() && Bluetooth.mismoDispositivo()) {
             Load.mazo.rellenarMazo(player);
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
+            iniciarMarcador('0');
         } else if (btnAtras.meTocaste() && !AtsUtil.mismoDispositivo && !AtsUtil.machine && Juego.idMachine == 1) {
             Load.mazo.rellenarMazo(player);
             BluetoothSingleton.getInstance().bluetoothManager
                     .sendMessage2("Cerrar");
             BluetoothSingleton.getInstance().bluetoothManager.stop();
             AtsUtil.game.setScreen(AtsScreens.screenMain);
+
+            iniciarMarcador('0');
         }
 
 
@@ -123,6 +127,7 @@ public class ScreenJuego implements Screen {
 
     @Override
     public void hide() {
+
 
     }
 
@@ -176,8 +181,22 @@ public class ScreenJuego implements Screen {
     }
 
     public static void iniciarMarcador(char marcador) {
+
+        marcadorJugador1.limpiarTexto();
+        marcadorJugador2.limpiarTexto();
+
         marcadorJugador1.llenar_texto(marcador);
         marcadorJugador2.llenar_texto(marcador);
+    }
+
+    public static void actualizarMarcador(InputScreenJuego marcadorJugador, int puntuacion) {
+        marcadorJugador.limpiarTexto();
+
+        if (puntuacion > 9) {
+            marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(0));//Primer digito
+            marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(1));//Segundo digito.
+        } else
+            marcadorJugador.llenar_texto((char) ('0' + puntuacion));
     }
 
 

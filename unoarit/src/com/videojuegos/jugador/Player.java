@@ -365,36 +365,16 @@ public class Player {
     }
 
     /**
-     * DEBO MEJORAR ESTE METODO Y TRATAR DE QUE HAYA UN MANAGER, ENTRE ESTA CLASE Y LA DE
-     * SCREEN JUEGO.
+     * Metodo que se encarga de pintar el marcador en la pantalla.
      */
 
     public void publicarMarcador() {
         //ScreenJuego.crearMarcadorSiNoExiste();
 
         if (this.getCorreo().equalsIgnoreCase("Maquina")) {
-            ScreenJuego.marcadorJugador2.limpiarTexto();
-            if (this.obtenerPuntuacion() > 9) {
-
-                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
-                actualizar_marcador(ScreenJuego.marcadorJugador2, Integer.toString(this.obtenerPuntuacion()).charAt(0));
-                ScreenJuego.marcadorJugador2.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
-            } else
-                ScreenJuego.marcadorJugador2.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
+            ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador2, this.obtenerPuntuacion());
         } else {
-            ScreenJuego.marcadorJugador1.limpiarTexto();
-            if (this.obtenerPuntuacion() > 9) {
-
-                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(0));
-                ScreenJuego.marcadorJugador1.llenar_texto(Integer.toString(this.obtenerPuntuacion()).charAt(1));
-            } else
-                ScreenJuego.marcadorJugador1.llenar_texto((char) ('0' + this.obtenerPuntuacion()));
+            ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador1, this.obtenerPuntuacion());
         }
     }
-
-    private void actualizar_marcador(InputScreenJuego marcadorJugador, char num) {
-        marcadorJugador.llenar_texto(num);
-    }
-
-
 }
