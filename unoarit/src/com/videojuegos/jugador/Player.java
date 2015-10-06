@@ -134,7 +134,6 @@ public class Player {
                 if ((getIndex() + i) < getMazoPlayer().size()) {
                     getMazoPlayer().get(getIndex() + i).setPosicion(
                             getPosX()[i], getAntY());
-                    System.out.println("index ::::" + index);
                 }
             }
         } else {
