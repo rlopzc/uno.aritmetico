@@ -142,13 +142,15 @@ public class Turno {
         db.agregarTurno(new DBTurno(Juego.idPartidaDB, Juego.turnoDB, p.getCorreo(),
                 Juego.colorDB, operacionMazo, operacionJugada, valor));
 
-        String partida = "Número de Partida: " + Juego.idPartidaDB
+        String jugada = "Número de Partida: " + Juego.idPartidaDB
                 + ", Turno: " + Juego.turnoDB + ", Jugador: " + p.getCorreo()
                 + ", Color: " + color
                 + ", Operacion Mazo: " + operacionMazo
                 + ", Operacion Jugada: " + operacionJugada
                 + ", Valor: " + valor;
-        System.out.println("Partida: " + partida);
+
+        System.out.println("La jugada fue: ");
+        System.out.println(jugada);
     }
 
 
@@ -261,12 +263,6 @@ public class Turno {
     }
 
     /**
-     * @param int turno
-     *            <p>
-     *            <pre>
-     *                                                                                                                                                                                                                                                   Devuelve la carta que esta siendo tocada o null
-     *                                                                                                                                                                                                                                                   en caso de que ninguna este siendo tocada.
-     *                                                                                                                                                                                                                                                   </pre>
      * @return Carta seleccionada
      */
 
@@ -290,13 +286,8 @@ public class Turno {
     }
 
     /**
-     * @param Vector3 v
-     * @param Carta   s
-     *                <p>
-     *                <pre>
-     *                                                                                                                                                                                                                                                                                                                                           Realiza la reordenacion de las cartas, cuando
-     *                                                                                                                                                                                                                                                                                                                                           un jugador posiciona la carta seleccionada s sobre otra carta.
-     *                                                                                                                                                                                                                                                                                                                                           </pre>
+     * @param m Movimiento
+     *          </pre>
      */
 
     private static void sobreOtraCarta(Movimiento m) {
@@ -344,29 +335,23 @@ public class Turno {
     }
 
     /**
-     * @param Carta   c
-     * @param Vector3 v
-     *                <p>
-     *                <pre>
-     *                     Realiza el movimiento de la carta seleccionada; si la carta no esta sobre
-     *                    otra carta o la carta no se encuentra sobre la carta del centro, entonces
-     *                    a la carta seleccionada se le asigna la posicision en pantalla en direcccion
-     *                    a donde la mueva el jugador; en caso de que la carta seleccionada se encuentre
-     *                    sobre la carta que se encuentra en el centro, entonces si el color
-     *                    o valor aritmetico de la carta seleccionada es igual al color, color comodin
-     *                    o valor aritmetico de la carta que se encuentra en el centro, entonces
-     *                    la carta seleccionada se convierte en la nueva carta del centro, se elimina del
-     *                    mazo del jugador en turno y se finaliza el turno del jugador actual; en caso
-     *                    contrario se emite un pitido y se reacomoda la carta en su lugar original.
-     *                    </pre>
+     * @param m Movimiento
+     *          <p>
+     *          <pre>
+     *                                       Realiza el movimiento de la carta seleccionada; si la carta no esta sobre
+     *                                      otra carta o la carta no se encuentra sobre la carta del centro, entonces
+     *                                      a la carta seleccionada se le asigna la posicision en pantalla en direcccion
+     *                                      a donde la mueva el jugador; en caso de que la carta seleccionada se encuentre
+     *                                      sobre la carta que se encuentra en el centro, entonces si el color
+     *                                      o valor aritmetico de la carta seleccionada es igual al color, color comodin
+     *                                      o valor aritmetico de la carta que se encuentra en el centro, entonces
+     *                                      la carta seleccionada se convierte en la nueva carta del centro, se elimina del
+     *                                      mazo del jugador en turno y se finaliza el turno del jugador actual; en caso
+     *                                      contrario se emite un pitido y se reacomoda la carta en su lugar original.
+     *                                      </pre>
      *
-     *                <pre>
-     *                                                                                                                                                                                                                                                                                                                                           Caso especial cuando la carta seleccionada es una carta comodin, es decir, es
-     *                                                                                                                                                                                                                                                                                                                                           una carta de color negro, entonces la carta seleccionada se convierte en la
-     *                                                                                                                                                                                                                                                                                                                                           nueva carta del centro, se elimina del mazo del jugador en turno, se muestra
-     *                                                                                                                                                                                                                                                                                                                                           al jugador en turno una pantalla para que elija el color que desea para el color
-     *                                                                                                                                                                                                                                                                                                                                           de la siguiente carta del centro y se finaliza el turno del jugador actual.
-     *                    </pre>
+     *          <pre>     de la siguiente carta del centro y se finaliza el turno del jugador actual.
+     *                                      </pre>
      */
 
     private static void moverCarta(Movimiento m) {
@@ -381,7 +366,7 @@ public class Turno {
                         if (c.getValor() == DataCarta.cBloq) {
                             Juego.bloquear = true;
                         } else if (c.getValor() == DataCarta.cReg) {
-                            Juego.regresar = (Juego.regresar) ? false : true;
+                            Juego.regresar = (!Juego.regresar);
                         } else if (c.getValor() == DataCarta.cMas1) {
                             Juego.masuno = true;
                         } else if (c.getValor() == DataCarta.cMas2) {
@@ -429,14 +414,7 @@ public class Turno {
     }
 
     /**
-     * @param int id
-     *            <p>
-     *            <pre>
-     *                                                                                                                                                                                                                                                   Recibe como parametro el id del jugador que esta en turno
-     *                                                                                                                                                                                                                                                   y si el id del jugador es igual al id del jugador que esta en turno
-     *                                                                                                                                                                                                                                                   entonces se puede realizar el movimiento de las cartas, hacia el
-     *                                                                                                                                                                                                                                                   centro.
-     *                                                                                                                                                                                                                                                   </pre>
+     * </pre>
      */
 
     public static void turno() {
@@ -451,7 +429,6 @@ public class Turno {
                     .RecuperarTurno();
 
         }
-        // System.out.println("turno juego"+Juego.turno+"Jugador ID"+p.getId());
         if (Juego.turno == p.getId()) {
             if (Juego.terminoTurno) {
                 if (Bluetooth.bluetooth()) {
@@ -502,7 +479,6 @@ public class Turno {
 
                     if (c != null) {
                         Movimiento m = new Movimiento(c.getId(), v);
-//						System.out.println("movimiento" + m.toString());
                         if (Bluetooth.bluetooth()) {
                             Bluetooth.sendMessage(m);
                         }

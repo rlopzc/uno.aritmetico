@@ -12,6 +12,8 @@ import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
 public class AtsUtil {
 	public static boolean machine;
 	public static boolean mismoDispositivo;
+
+
 	// Nuestro GL10
 	public static GL10 gl;
 

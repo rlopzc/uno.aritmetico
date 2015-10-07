@@ -12,7 +12,7 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 
 	// All Static variables
 	// Database Version
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 
 	// Database Name
 	private static final String DATABASE_NAME = "gestionPartidas";
@@ -26,6 +26,8 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 	private static final String KEY_TURNO = "turno";
 	private static final String KEY_JUGADOR = "jugador";
 	private static final String KEY_COLOR = "color";
+	private static final String KEY_FECHA = "fecha";
+
 	private static final String KEY_OPERACION_MAZO = "operacion_mazo";
 	private static final String KEY_OPERACION_JUGADA = "operacion_jugada";
 	private static final String KEY_VALOR = "valor";
@@ -40,12 +42,12 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_PARTIDA + "("
+		String CREAR_TABLA_PARTIDA = "CREATE TABLE " + TABLE_PARTIDA + "("
 				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_ID_PARTIDA + " INTEGER,"
 				+ KEY_TURNO + " INTEGER," + KEY_JUGADOR + " TEXT,"
 				+ KEY_COLOR + " TEXT," + KEY_OPERACION_MAZO + " TEXT,"
-				+ KEY_OPERACION_JUGADA + " TEXT," + KEY_VALOR + " TEXT" + ")";
-		db.execSQL(CREATE_CONTACTS_TABLE);
+				+ KEY_OPERACION_JUGADA + " TEXT," + KEY_VALOR + " TEXT, " + KEY_FECHA + " DATE DEFAULT CURRENT_DATE)";
+		db.execSQL(CREAR_TABLA_PARTIDA);
 	}
 
 	/**
@@ -90,10 +92,12 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 				turno.setOperacionMazoDB(cursor.getString(5));
 				turno.setOperacionJugadaDB(cursor.getString(6));
 				turno.setValorDB(cursor.getString(7));
+				turno.setFecha(cursor.getString(8));
 
 				turnoList.add(turno);
 			} while (cursor.moveToNext());
 		}
+		//System.out.println(turnoList.get(0));
 
 		return turnoList;
 	}

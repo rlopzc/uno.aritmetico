@@ -228,20 +228,23 @@ public class ScreenMain implements Screen {
 		}
 	}
 
-	public void exportarBaseDatos(final int id_partida, final int turno, final String jugador, final String color, final String operacionMazo, final String operacionJugada, final String valor) {
-		RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
-		String url = "http://www.integramarineservices.com/unoaritmetico/web_service/v1/importadb";
-		StringRequest request = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
+    public void exportarBaseDatos(final int id_partida, final int turno, final String jugador,
+                                  final String color, final String operacionMazo, final String operacionJugada, final String valor) {
+        RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
+        String url = "192.168.232.241/unoaritmetico/web_service/v1/importadb";
+        StringRequest request = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
-					System.out.println("Response: " + response.toString());
-			}
+                System.out.println("Response: " + response);
+            }
 		}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				System.out.println("Algo salio mal.");
-			}
-		}) {
+                //System.out.println("Algo salio mal.");
+                //System.out.println(error.getLocalizedMessage());
+                error.printStackTrace();
+            }
+        }) {
 			@Override
 			protected Map<String, String> getParams() {
 				Map<String, String> params = new HashMap<String, String>();

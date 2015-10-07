@@ -70,10 +70,7 @@ public class Carta  {
 	}
 
 	public boolean meEstasTocando(int turno) {
-		if (jugador == turno) {
-			return AtsTM.meEstasTocando(puntas());
-		}
-		return false;
+		return jugador == turno && AtsTM.meEstasTocando(puntas());
 	}
 
 	public float[] puntas() {

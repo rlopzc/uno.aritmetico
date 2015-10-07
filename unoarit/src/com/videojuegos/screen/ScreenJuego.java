@@ -225,10 +225,20 @@ public class ScreenJuego implements Screen {
         }
     }
 
+    private static final int NUM_DIGITOS = 10;
+
+    /**
+     * @param marcadorJugador Es el marcador actual del jugador.
+     * @param puntuacion      es la nueva puntuacion. (Entero).
+     *                        Metodo que se encarga de refrescar en pantalla, los marcadores actuales de los jugadores.
+     *                        Se le pasa el marcador del jugador actual, junto con la puntuacion. Si el numero de digitos del numero
+     *                        no esta en el rango 0 - 9, entonces lo que hace es convertir el entero en String y obtener, tanto el primer caracter
+     *                        como el segundo caracter de la cadena de String.
+     */
     public static void actualizarMarcador(InputScreenJuego marcadorJugador, int puntuacion) {
         marcadorJugador.limpiarTexto();
 
-        if (puntuacion > 9) {
+        if (puntuacion > NUM_DIGITOS) {
             marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(0));//Primer digito
             marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(1));//Segundo digito.
         } else

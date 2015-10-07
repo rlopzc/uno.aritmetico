@@ -203,6 +203,8 @@ public class Load {
 		z = atlas.createSprite("z");
 		
 		Letra.load();
+
+
 	}
 	
 }
