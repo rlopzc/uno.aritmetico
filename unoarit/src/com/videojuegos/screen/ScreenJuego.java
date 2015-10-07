@@ -225,7 +225,7 @@ public class ScreenJuego implements Screen {
         }
     }
 
-    private static final int NUM_DIGITOS = 10;
+    private static final int NUM_DIGITOS = 9;
 
     /**
      * @param marcadorJugador Es el marcador actual del jugador.
