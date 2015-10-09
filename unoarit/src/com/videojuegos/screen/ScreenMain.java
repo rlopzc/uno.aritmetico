@@ -1,5 +1,7 @@
 package com.videojuegos.screen;
 
+import android.provider.Settings.Secure;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -41,8 +43,9 @@ public class ScreenMain implements Screen {
 	private static DBTurnoHandler db = new DBTurnoHandler(MainP.getContext());
 	private int id_partida, turno;
 	private String jugador, color, operacionMazo, operacionJugada, valor;
+	private String android_id = Secure.getString(MainP.getContext().getContentResolver(),
+			Secure.ANDROID_ID);
 
-	
 	/** 
 	 * En �ste m�todo se crean los botones y se les da la
 	 * funcionalidad de dirigir a las dem�s pantallas seg�n
@@ -76,16 +79,8 @@ public class ScreenMain implements Screen {
 		}
 		if (btnExportarDb.meTocaste()) {
 			List<DBTurno> turnos = db.obtenerTodosTurnos();
-			for (DBTurno t : turnos) {
-				id_partida = t.getIdPartidaDB();
-				turno = t.getTurnoDB();
-				jugador = t.getJugadorDB();
-				color = t.getColorDB();
-				operacionMazo = t.getOperacionMazoDB();
-				operacionJugada = t.getOperacionJugadaDB();
-				valor = t.getValorDB();
-				exportarBaseDatos(id_partida, turno, jugador, color, operacionMazo, operacionJugada, valor);
-			}
+			//creamos gson
+			exportarBaseDatos();
 			db.borrarTodosTurnos();
 		}
 		if (btnSoundoff.meTocaste()) {
@@ -231,8 +226,8 @@ public class ScreenMain implements Screen {
     public void exportarBaseDatos(final int id_partida, final int turno, final String jugador,
                                   final String color, final String operacionMazo, final String operacionJugada, final String valor) {
         RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
-        String url = "192.168.232.241/unoaritmetico/web_service/v1/importadb";
-        StringRequest request = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
+		String url = "http://192.168.228.186:3000/api/v1/unoartimetico/importdb";
+		StringRequest request = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
                 System.out.println("Response: " + response);
@@ -241,10 +236,10 @@ public class ScreenMain implements Screen {
 			@Override
 			public void onErrorResponse(VolleyError error) {
                 //System.out.println("Algo salio mal.");
-                //System.out.println(error.getLocalizedMessage());
-                error.printStackTrace();
-            }
-        }) {
+				System.out.println(error.getLocalizedMessage());
+				error.printStackTrace();
+			}
+		}) {
 			@Override
 			protected Map<String, String> getParams() {
 				Map<String, String> params = new HashMap<String, String>();
@@ -255,6 +250,43 @@ public class ScreenMain implements Screen {
 				params.put("operacionMazo", operacionMazo);
 				params.put("operacionJugada", operacionJugada);
 				params.put("valor", valor);
+				params.put("id_dispositivo", android_id);
+				System.out.println(params);
+				return params;
+			}
+		};
+		requestQueue.add(request);
+	}
+
+	//Recibe objeto gson
+
+	public void exportarBaseDatos() {
+		RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
+		String url = "http://192.168.228.186:3000/api/v1/unoartimetico/importdb";
+		StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				System.out.println("Response: " + response);
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				//System.out.println("Algo salio mal.");
+				System.out.println(error.getLocalizedMessage());
+				error.printStackTrace();
+			}
+		}) {
+			@Override
+			protected Map<String, String> getParams() {
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("id_partida", String.valueOf(id_partida));
+				params.put("turno", String.valueOf(turno));
+				params.put("jugador", jugador);
+				params.put("color", color);
+				params.put("operacionMazo", operacionMazo);
+				params.put("operacionJugada", operacionJugada);
+				params.put("valor", valor);
+				params.put("id_dispositivo", android_id);
 				System.out.println(params);
 				return params;
 			}
