@@ -11,6 +11,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.videojuegos.asset.AtsPos;
 import com.videojuegos.asset.AtsScreens;
 import com.videojuegos.asset.AtsSound;
@@ -41,10 +43,9 @@ public class ScreenMain implements Screen {
 	private ArrayList<String> emailsJugadores;
 	private AtsInputListener listener;
 	private static DBTurnoHandler db = new DBTurnoHandler(MainP.getContext());
-	private int id_partida, turno;
-	private String jugador, color, operacionMazo, operacionJugada, valor;
-	private String android_id = Secure.getString(MainP.getContext().getContentResolver(),
-			Secure.ANDROID_ID);
+    //	private int id_partida, turno;
+//	private String jugador, color, operacionMazo, operacionJugada, valor;
+    private String android_id = Secure.getString(MainP.getContext().getContentResolver(), Secure.ANDROID_ID);
 
 	/** 
 	 * En �ste m�todo se crean los botones y se les da la
@@ -79,9 +80,14 @@ public class ScreenMain implements Screen {
 		}
 		if (btnExportarDb.meTocaste()) {
 			List<DBTurno> turnos = db.obtenerTodosTurnos();
-			//creamos gson
-			exportarBaseDatos();
-			db.borrarTodosTurnos();
+
+            //creamos el gson
+            Gson gson = new GsonBuilder().create();
+            String value = gson.toJson(turnos);
+
+            //Enviamos el gson
+            exportarBaseDatos(value);
+            db.borrarTodosTurnos();
 		}
 		if (btnSoundoff.meTocaste()) {
 			AtsSound.onOff();
@@ -260,10 +266,10 @@ public class ScreenMain implements Screen {
 
 	//Recibe objeto gson
 
-	public void exportarBaseDatos() {
-		RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
-		String url = "http://192.168.228.186:3000/api/v1/unoartimetico/importdb";
-		StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+    public void exportarBaseDatos(String parametros) {
+        RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
+        String url = "http://192.168.231.80:3000/api/v1/uno_aritmetico/import_games";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
 				System.out.println("Response: " + response);
@@ -279,16 +285,11 @@ public class ScreenMain implements Screen {
 			@Override
 			protected Map<String, String> getParams() {
 				Map<String, String> params = new HashMap<String, String>();
-				params.put("id_partida", String.valueOf(id_partida));
-				params.put("turno", String.valueOf(turno));
-				params.put("jugador", jugador);
-				params.put("color", color);
-				params.put("operacionMazo", operacionMazo);
-				params.put("operacionJugada", operacionJugada);
-				params.put("valor", valor);
-				params.put("id_dispositivo", android_id);
-				System.out.println(params);
-				return params;
+
+                params.put("games", parametros);
+                params.put("id_dispositivo", android_id);
+                System.out.println(params);
+                return params;
 			}
 		};
 		requestQueue.add(request);

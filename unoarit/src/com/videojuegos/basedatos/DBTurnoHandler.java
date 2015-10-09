@@ -90,8 +90,8 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 				turno.setJugadorDB(cursor.getString(3));
 				turno.setColorDB(cursor.getString(4));
 				turno.setOperacionMazoDB(cursor.getString(5));
-				turno.setOperacionJugadaDB(cursor.getString(6));
-				turno.setValorDB(cursor.getString(7));
+                turno.setOperacionJugadaDB(cursor.getString(6));
+                turno.setValorDB(cursor.getString(7));
 				turno.setFecha(cursor.getString(8));
 
 				turnoList.add(turno);
@@ -115,9 +115,8 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 	 * Método para asignar el ultimo id de partida de la tabla
 	 */
 	public int asignarUltimoIdPartida() {
-		int id_partidaActual = 1;
-		int ultimoIdDb;
-		String selectQuery = "SELECT  * FROM " + TABLE_PARTIDA;
+        int ultimoIdDb = 0;
+        String selectQuery = "SELECT  * FROM " + TABLE_PARTIDA;
 
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
@@ -125,11 +124,8 @@ public class DBTurnoHandler extends SQLiteOpenHelper {
 		if(cursor!=null && cursor.getCount()!=0){
 			cursor.moveToLast();
 			ultimoIdDb = cursor.getInt(cursor.getColumnIndex(KEY_ID_PARTIDA));
-			while(id_partidaActual <= ultimoIdDb) {
-				id_partidaActual++;
-			}
 		}
 
-		return id_partidaActual;
-	}
+        return ultimoIdDb + 1;
+    }
 }

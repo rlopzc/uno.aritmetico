@@ -139,6 +139,7 @@ public class ScreenJuego implements Screen {
     @Override
     public void resume() {
         //crearMarcadorSiNoExiste();
+
         dibujar_boton_en_pantalla();
     }
 
