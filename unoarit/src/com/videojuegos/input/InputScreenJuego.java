@@ -142,8 +142,6 @@ public class InputScreenJuego implements InputProcessor {
             for (int i = 0; i < texto.size(); i++) {
                 switch (texto.get(i)) {
                     case '0':
-
-
                         if (rotarPosicion)
                             prueba = new PintarLetra(this.spritebatch, Load.cero, respaldo, this.y, AtsPos.anchoNumero, AtsPos.altoNumero, getGradosRotacion());
                         else

@@ -31,7 +31,6 @@ public class PintarLetra {
         this.x = x;
         this.y = y;
         this.batch = batch;
-        //this.grados = grados;
 
         if (texture != null) {
             setPosicion(x, y, grados);

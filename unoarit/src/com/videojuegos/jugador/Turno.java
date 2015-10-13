@@ -23,6 +23,8 @@ public class Turno {
     private static float cartaMachineY = 8.4f;
     private static DBTurnoHandler db = new DBTurnoHandler(MainP.getContext());
 
+    private static long segundos_inicio, segundos_final;
+
     /**
      * Es la carta de la maquina
      */
@@ -34,15 +36,15 @@ public class Turno {
      */
 
     public static void setPlayer(Player p) {
-        Turno.p = p;
+        Turno.setP(p);
     }
 
     private static ArrayList<Carta> machineCartaColor() {
         ArrayList<Carta> cartasColor = new ArrayList<Carta>();
         Carta cc = Juego.centroCarta;
 
-        for (int i = 0; i < p.getMazoPlayer().size(); i++) {
-            Carta c = p.getMazoPlayer().get(i);
+        for (int i = 0; i < getP().getMazoPlayer().size(); i++) {
+            Carta c = getP().getMazoPlayer().get(i);
             if ((cc.getColor() == c.getColor())
                     || (cc.getColorComodin() == c.getColor())
                     || (c.getColor() == DataCarta.neg)) {
@@ -54,8 +56,8 @@ public class Turno {
 
     private static boolean machineTieneColor(int i) {
 
-        for (int j = 0; j < p.getMazoPlayer().size(); j++) {
-            if (Load.cartasBase[i].getColor() == p.getMazoPlayer().get(j)
+        for (int j = 0; j < getP().getMazoPlayer().size(); j++) {
+            if (Load.cartasBase[i].getColor() == getP().getMazoPlayer().get(j)
                     .getColor()) {
                 return true;
             }
@@ -79,8 +81,8 @@ public class Turno {
         ArrayList<Carta> cartasValor = new ArrayList<Carta>();
         Carta cc = Juego.centroCarta;
 
-        for (int i = 0; i < p.getMazoPlayer().size(); i++) {
-            Carta c = p.getMazoPlayer().get(i);
+        for (int i = 0; i < getP().getMazoPlayer().size(); i++) {
+            Carta c = getP().getMazoPlayer().get(i);
             if (cc.getValor() == c.getValor()) {
                 cartasValor.add(c);
             }
@@ -95,61 +97,76 @@ public class Turno {
                 if ((cc.getColor() == c.getColor())) {
                     if (cc.getValor() == c.getValor()) {
                         if (c.getOperacion().equals(cc.getOperacion())) {
-                            p.sumarPuntosPorOperacionSimple();
+                            getP().sumarPuntosPorOperacionSimple();
 
                         } else {
-                            p.sumarPuntosPorOperacionDoble();
+                            getP().sumarPuntosPorOperacionDoble();
                         }
-                        save("si", cc.getOperacion(), c.getOperacion(), Integer.toString(c.getValor()));
+                        segundos_final = System.currentTimeMillis();
+                        save("si", cc.getOperacion(), c.getOperacion(), Integer.toString(c.getValor()), obtenerTiempoDelTurno());
                         return true;
                     } else {
-                        p.sumarPuntosPorColor();
+                        getP().sumarPuntosPorColor();
 
-                        save("si", "", "", "");
+                        segundos_final = System.currentTimeMillis();
+                        save("si", "", "", "", obtenerTiempoDelTurno());
+
                         return true;
                     }
                 } else if (cc.getValor() == c.getValor()) {
                     if (c.getOperacion().equals(cc.getOperacion())) {
-                        p.sumarPuntosPorOperacionSimple();
+                        getP().sumarPuntosPorOperacionSimple();
 
                     } else {
-                        p.sumarPuntosPorOperacionDoble();
+                        getP().sumarPuntosPorOperacionDoble();
 
                     }
-                    save("no", cc.getOperacion(), c.getOperacion(), Integer.toString(c.getValor()));
+                    segundos_final = System.currentTimeMillis();
+                    save("no", cc.getOperacion(), c.getOperacion(), Integer.toString(c.getValor()), obtenerTiempoDelTurno());
+
                     return true;
                 }
             } else if (cc.getValor() == c.getValor()) {
-                p.sumarPuntosPorColor();
+                getP().sumarPuntosPorColor();
+                segundos_final = System.currentTimeMillis();
+
                 return true;
             } else if ((c.getColor() == DataCarta.neg) || (cc.getColorComodin() == c.getColor())) {
+                segundos_final = System.currentTimeMillis();
 
                 return true;
             }
+            segundos_final = System.currentTimeMillis();
 
-            return p.getCorreo().equalsIgnoreCase("Maquina"); //return true.
+            return getP().getCorreo().equalsIgnoreCase("Maquina"); //return true.
         }
+        segundos_final = System.currentTimeMillis();
+
         return false;
+    }
+
+    public static long obtenerTiempoDelTurno() {
+        esPrimeraVez = true;//Volvemos a empezar para tomar el tiempo del siguiente turno.
+        return ((segundos_final - segundos_inicio) / 1000); //Convertimos el tiempo de milisegundos a segundos.
     }
 
     /**
      * Metodo para almacenar los turnos de cada jugador
      */
 
-    public static void save(String color, String operacionMazo, String operacionJugada, String valor) {
+    public static void save(String color, String operacionMazo, String operacionJugada, String valor, long tiempoTardadoEnMoverCarta) {
         Juego.turnoDB++;
         //Se agregan los datos a la tabla y se imprime el movimiento
-        db.agregarTurno(new DBTurno(Juego.idPartidaDB, Juego.turnoDB, p.getCorreo(),
-                Juego.colorDB, operacionMazo, operacionJugada, valor));
+        db.agregarTurno(new DBTurno(Juego.idPartidaDB, Juego.turnoDB, getP().getCorreo(),
+                Juego.colorDB, operacionMazo, operacionJugada, valor, tiempoTardadoEnMoverCarta));
 
         String jugada = "Número de Partida: " + Juego.idPartidaDB
-                + ", Turno: " + Juego.turnoDB + ", Jugador: " + p.getCorreo()
+                + ", Turno: " + Juego.turnoDB + ", Jugador: " + getP().getCorreo()
                 + ", Color: " + color
                 + ", Operacion Mazo: " + operacionMazo
                 + ", Operacion Jugada: " + operacionJugada
-                + ", Valor: " + valor;
-
-        System.out.println("La jugada fue: ");
+                + ", Valor: " + valor +
+                ", Tiempo: " + tiempoTardadoEnMoverCarta;
         System.out.println(jugada);
     }
 
@@ -226,10 +243,10 @@ public class Turno {
         try {
             Carta c = AtsTM.getCartaAleatoria(1, Bluetooth.bluetooth());
             if (c != null) {
-                c.setJugador(p.getId());
+                c.setJugador(getP().getId());
             }
             AtsSound.sonarSound(AtsSound.correcto);
-            p.getMazoPlayer().add(p.getIndex(), c);
+            getP().getMazoPlayer().add(getP().getIndex(), c);
             return c;
         } catch (Exception e) {
             // System.out.println(e.toString());
@@ -238,9 +255,9 @@ public class Turno {
     }
 
     public static Carta cartaPorID(int id) {
-        for (int i = 0; i < p.getMazoPlayer().size(); i++) {
-            if (p.getMazoPlayer().get(i).getId() == id) {
-                return p.getMazoPlayer().get(i);
+        for (int i = 0; i < getP().getMazoPlayer().size(); i++) {
+            if (getP().getMazoPlayer().get(i).getId() == id) {
+                return getP().getMazoPlayer().get(i);
             }
         }
         return null;
@@ -258,7 +275,7 @@ public class Turno {
     public static void tomarMazo() {
         if (Juego.btnMazo.meTocaste()) {
             addCarta();
-            p.setPositionCartas();
+            getP().setPositionCartas();
         }
     }
 
@@ -268,11 +285,11 @@ public class Turno {
 
     private static Carta seleccionada() {
         Carta c = null;
-        if (p.getId() == Juego.turno) {
-            for (int i = 0; i < p.getNumEle(); i++) {
-                int j = p.getIndex() + i;
-                if (j < p.getMazoPlayer().size()) {
-                    c = p.getMazoPlayer().get(j);
+        if (getP().getId() == Juego.turno) {
+            for (int i = 0; i < getP().getNumEle(); i++) {
+                int j = getP().getIndex() + i;
+                if (j < getP().getMazoPlayer().size()) {
+                    c = getP().getMazoPlayer().get(j);
                     if (c.meEstasTocando(Juego.turno)) {
                         if (c.meTocaste()) {
                             AtsSound.sonarSound(AtsSound.seleccion);
@@ -293,13 +310,13 @@ public class Turno {
     private static void sobreOtraCarta(Movimiento m) {
         Carta s = cartaPorID(m.getIdCarta());
         Vector3 v = m.getMoveVector();
-        for (int i = 0; i < p.getNumEle(); i++) {
-            int j = p.getIndex() + i;
-            if (j < p.getMazoPlayer().size()) {
-                Carta c = p.getMazoPlayer().get(j);
+        for (int i = 0; i < getP().getNumEle(); i++) {
+            int j = getP().getIndex() + i;
+            if (j < getP().getMazoPlayer().size()) {
+                Carta c = getP().getMazoPlayer().get(j);
                 if (c != s) {
                     if (c.getRectangle().contains(v)) {
-                        p.setPositionCartas();
+                        getP().setPositionCartas();
                     }
                 }
             }
@@ -322,8 +339,8 @@ public class Turno {
 
     private static boolean frio() {
         Carta cc = Juego.centroCarta;
-        for (int i = 0; i < p.getMazoPlayer().size(); i++) {
-            Carta c = p.getMazoPlayer().get(i);
+        for (int i = 0; i < getP().getMazoPlayer().size(); i++) {
+            Carta c = getP().getMazoPlayer().get(i);
             if ((cc.getColor() == c.getColor())
                     || (cc.getValor() == c.getValor())
                     || (c.getColor() == DataCarta.neg)
@@ -338,20 +355,20 @@ public class Turno {
      * @param m Movimiento
      *          <p>
      *          <pre>
-     *                                       Realiza el movimiento de la carta seleccionada; si la carta no esta sobre
-     *                                      otra carta o la carta no se encuentra sobre la carta del centro, entonces
-     *                                      a la carta seleccionada se le asigna la posicision en pantalla en direcccion
-     *                                      a donde la mueva el jugador; en caso de que la carta seleccionada se encuentre
-     *                                      sobre la carta que se encuentra en el centro, entonces si el color
-     *                                      o valor aritmetico de la carta seleccionada es igual al color, color comodin
-     *                                      o valor aritmetico de la carta que se encuentra en el centro, entonces
-     *                                      la carta seleccionada se convierte en la nueva carta del centro, se elimina del
-     *                                      mazo del jugador en turno y se finaliza el turno del jugador actual; en caso
-     *                                      contrario se emite un pitido y se reacomoda la carta en su lugar original.
-     *                                      </pre>
+     *                                                                                    Realiza el movimiento de la carta seleccionada; si la carta no esta sobre
+     *                                                                                   otra carta o la carta no se encuentra sobre la carta del centro, entonces
+     *                                                                                   a la carta seleccionada se le asigna la posicision en pantalla en direcccion
+     *                                                                                   a donde la mueva el jugador; en caso de que la carta seleccionada se encuentre
+     *                                                                                   sobre la carta que se encuentra en el centro, entonces si el color
+     *                                                                                   o valor aritmetico de la carta seleccionada es igual al color, color comodin
+     *                                                                                   o valor aritmetico de la carta que se encuentra en el centro, entonces
+     *                                                                                   la carta seleccionada se convierte en la nueva carta del centro, se elimina del
+     *                                                                                   mazo del jugador en turno y se finaliza el turno del jugador actual; en caso
+     *                                                                                   contrario se emite un pitido y se reacomoda la carta en su lugar original.
+     *                                                                                   </pre>
      *
      *          <pre>     de la siguiente carta del centro y se finaliza el turno del jugador actual.
-     *                                      </pre>
+     *                                                                                   </pre>
      */
 
     private static void moverCarta(Movimiento m) {
@@ -375,16 +392,16 @@ public class Turno {
 
                         AtsSound.sonarSound(AtsSound.correcto);
                         Juego.addMazo(c);
-                        p.getMazoPlayer().remove(c);
-                        p.setPositionCartas();
+                        getP().getMazoPlayer().remove(c);
+                        getP().setPositionCartas();
 
-                        if (p.getMazoPlayer().size() == 0) {
+                        if (getP().getMazoPlayer().size() == 0) {
                             Juego.terminoJuego = true;
-                            Juego.idPlayer = p.getId();
+                            Juego.idPlayer = getP().getId();
                             return;
                         } else {
                             if (c.getColor() == DataCarta.neg) {
-                                if (((AtsUtil.machine) && (p.getId() != 2))
+                                if (((AtsUtil.machine) && (getP().getId() != 2))
                                         || ((!AtsUtil.machine)))
                                     AtsUtil.game
                                             .setScreen(new ScreenEligeColor(c));
@@ -396,40 +413,44 @@ public class Turno {
                             cartaMachineY = 8.4f;
                         }
 
-                        if ((p.getIndex() - 1) >= 0) {
-                            p.setIndex(p.getIndex() - 1);
-                            p.setPositionCartas();
+                        if ((getP().getIndex() - 1) >= 0) {
+                            getP().setIndex(getP().getIndex() - 1);
+                            getP().setPositionCartas();
                         }
                     } else {
                         AtsSound.sonarSound(AtsSound.incorrecto);
-                        p.setPositionCartas();
+                        getP().setPositionCartas();
                     }
                 } else {
                     moverCartaID(c, v);
                 }
             }
         } else {
-            p.setPositionCartas();
+            getP().setPositionCartas();
         }
+
+
     }
 
     /**
      * </pre>
      */
 
+    private static boolean esPrimeraVez = true;
+
     public static void turno() {
-        if (Bluetooth.bluetooth()) {
 
-
-            System.out
-                    .println("turnorecibido"
-                            + BluetoothSingleton.getInstance().bluetoothManager
-                            .RecuperarNumero());
-            Juego.turno = BluetoothSingleton.getInstance().bluetoothManager
-                    .RecuperarTurno();
-
+        if (esPrimeraVez) {
+            segundos_inicio = System.currentTimeMillis();
+            esPrimeraVez = false;
         }
-        if (Juego.turno == p.getId()) {
+
+        if (Bluetooth.bluetooth()) {
+            System.out.println("turnorecibido" + BluetoothSingleton.getInstance().bluetoothManager.RecuperarNumero());
+            Juego.turno = BluetoothSingleton.getInstance().bluetoothManager.RecuperarTurno();
+        }
+        if (Juego.turno == getP().getId()) {
+
             if (Juego.terminoTurno) {
                 if (Bluetooth.bluetooth()) {
                     if (Bluetooth.bluetoothTurno()) {
@@ -473,7 +494,7 @@ public class Turno {
                     Juego.terminoTurno = true;
                 }
 
-                if (!Bluetooth.machineTurno(p)) {
+                if (!Bluetooth.machineTurno(getP())) {
                     Carta c = seleccionada();
                     Vector3 v = AtsTM.tocasteAqui();
 
@@ -486,10 +507,10 @@ public class Turno {
                         moverCarta(m);
                         sobreOtraCarta(m);
                     } else {
-                        p.setPositionCartas();
+                        getP().setPositionCartas();
                     }
                 } else {
-                    p.setPositionCartas();
+                    getP().setPositionCartas();
                     if (!Juego.terminoTurno)
                         machine();
                     Vector3 v = new Vector3(AtsPos.centroX, cartaMachineY, 0);
@@ -508,4 +529,11 @@ public class Turno {
         }
     }
 
+    public static Player getP() {
+        return p;
+    }
+
+    public static void setP(Player p) {
+        Turno.p = p;
+    }
 }

@@ -51,26 +51,26 @@ public class AtsPos {
     public static final float mazoP4Y = 1.3749998f;
 
     // Para los colores comodin
-    public static final float vefuX = 2.1874995f;// vefux
-    public static final float vefuY = 6.999999f;// vefuy
-    public static final float vebaX = 4.8749995f;// vebax
-    public static final float vebaY = 6.999999f;// vebay
-    public static final float ambaX = 7.4374995f;// ambax
-    public static final float ambaY = 6.999999f;// ambay
-    public static final float amfuX = 10.125f;// amfux
-    public static final float amfuY = 7.031249f;// amfuy
-    public static final float naX = 12.843749f;// nax
-    public static final float naY = 7.0624995f;// nay
-    public static final float azbaX = 12.9375f;// rojx
-    public static final float azbaY = 2.8437498f;// rojy
-    public static final float azfuX = 10.312499f;// rosx
-    public static final float azfuY = 2.8749998f;// rosy
-    public static final float moX = 7.59375f;// mox
-    public static final float moY = 2.8437498f;// moy
-    public static final float rosX = 4.9375f;// azfux
-    public static final float rosY = 2.9062498f;// azfuy
-    public static final float rojX = 2.21875f;// azbax
-    public static final float rojY = 2.8749998f;// azbay
+//    public static final float vefuX = 2.1874995f;// vefux
+//    public static final float vefuY = 6.999999f;// vefuy
+//    public static final float vebaX = 4.8749995f;// vebax
+//    public static final float vebaY = 6.999999f;// vebay
+//    public static final float ambaX = 7.4374995f;// ambax
+//    public static final float ambaY = 6.999999f;// ambay
+//    public static final float amfuX = 10.125f;// amfux
+//    public static final float amfuY = 7.031249f;// amfuy
+//    public static final float naX = 12.843749f;// nax
+//    public static final float naY = 7.0624995f;// nay
+//    public static final float azbaX = 12.9375f;// rojx
+//    public static final float azbaY = 2.8437498f;// rojy
+//    public static final float azfuX = 10.312499f;// rosx
+//    public static final float azfuY = 2.8749998f;// rosy
+//    public static final float moX = 7.59375f;// mox
+//    public static final float moY = 2.8437498f;// moy
+//    public static final float rosX = 4.9375f;// azfux
+//    public static final float rosY = 2.9062498f;// azfuy
+//    public static final float rojX = 2.21875f;// azbax
+//    public static final float rojY = 2.8749998f;// azbay
 
     // Posicion botones main
     public static final float btnSoundX = 12.968749f;
@@ -112,7 +112,7 @@ public class AtsPos {
     public static final float cartaAyudaY = 5.0f;
 
     //Tama�o numeros
-    public static final float anchoNumero = 0.4f;
+    public static final float anchoNumero = 0.4f;//0.4
     public static final float altoNumero = 0.5f;
 
     // Tama�o letras

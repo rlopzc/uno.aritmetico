@@ -1,7 +1,5 @@
 package com.videojuegos.jugador;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.videojuegos.asset.AtsGuardar;
 import com.videojuegos.asset.AtsPos;
@@ -17,6 +15,8 @@ import com.videojuegos.cartas.Carta;
 import com.videojuegos.screen.ScreenGanaste;
 import com.videojuegos.screen.ScreenJuego;
 import com.videojuegos.unoarit.MainP;
+
+import java.util.ArrayList;
 
 public class Juego {
 
@@ -69,10 +69,10 @@ public class Juego {
 	public Juego(int numJug, ArrayList<String> jugadores) {
 		Juego.numJug = numJug;
 		Juego.turno = 1;
-		Juego.idPartidaDB = db.asignarUltimoIdPartida();;
-		Juego.turnoDB = 0;
-		Juego.colorDB = "";
-		Juego.valorDB = "";
+        Juego.idPartidaDB = db.asignarUltimoIdPartida();
+        Juego.turnoDB = 0;
+        Juego.colorDB = "";
+        Juego.valorDB = "";
 
 		player = new ArrayList<Player>(numJug);
 		centroCartaMazo = new ArrayList<Carta>();
@@ -142,7 +142,8 @@ public class Juego {
 			player.get(i).dibujarPlayer(spriteBatch);
 			player.get(i).turno(spriteBatch);
 		}
-	}
+
+    }
 
 	public void onPause() {
 		AtsGuardar.Guardar(this);

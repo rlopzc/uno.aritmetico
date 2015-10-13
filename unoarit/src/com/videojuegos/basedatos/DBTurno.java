@@ -12,6 +12,7 @@ public class DBTurno {
     String operacion_jugada;
     String valor;
     private String fecha;
+    private long tiempoTardadoEnMoverCarta;
 
     // Constructor vacio
     public DBTurno() {
@@ -19,7 +20,7 @@ public class DBTurno {
 
 
     // Constructor
-    public DBTurno(int id_partida, int turno, String jugador, String color, String operacion_mazo, String operacion_jugada, String valor) {
+    public DBTurno(int id_partida, int turno, String jugador, String color, String operacion_mazo, String operacion_jugada, String valor, long tiempoTardadoEnMoverCarta) {
         this.id_partida = id_partida;
         this.turno = turno;
         this.jugador = jugador;
@@ -27,7 +28,7 @@ public class DBTurno {
         this.operacion_mazo = operacion_mazo;
         this.operacion_jugada = operacion_jugada;
         this.valor = valor;
-
+        this.setTiempoTardadoEnMoverCarta(tiempoTardadoEnMoverCarta);
     }
 
     // getting ID
@@ -132,6 +133,15 @@ public class DBTurno {
                 ", operacion_jugada='" + operacion_jugada + '\'' +
                 ", valor='" + valor + '\'' +
                 ", fecha='" + fecha + '\'' +
+                ", tiempoTardadoEnMoverCarta=" + tiempoTardadoEnMoverCarta +
                 '}';
+    }
+
+    public long getTiempoTardadoEnMoverCarta() {
+        return tiempoTardadoEnMoverCarta;
+    }
+
+    public void setTiempoTardadoEnMoverCarta(long tiempoTardadoEnMoverCarta) {
+        this.tiempoTardadoEnMoverCarta = tiempoTardadoEnMoverCarta;
     }
 }

@@ -195,6 +195,7 @@ public class Player {
 
     public void turno(SpriteBatch spriteBatch) {
         if (Juego.turno == this.id) {
+
             Turno.setPlayer(this);
             Juego.btnMazo.setPosicion(mazoX, mazoY, mazoG);
             Juego.btnMazo.dibujar(spriteBatch);
@@ -368,7 +369,6 @@ public class Player {
      */
 
     public void publicarMarcador() {
-        //ScreenJuego.crearMarcadorSiNoExiste();
 
         if (this.getCorreo().equalsIgnoreCase("Maquina") || this.getCorreo().equalsIgnoreCase("Player 2"))
             ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador2, this.obtenerPuntuacion());

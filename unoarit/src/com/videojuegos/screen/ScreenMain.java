@@ -229,41 +229,6 @@ public class ScreenMain implements Screen {
 		}
 	}
 
-    public void exportarBaseDatos(final int id_partida, final int turno, final String jugador,
-                                  final String color, final String operacionMazo, final String operacionJugada, final String valor) {
-        RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
-		String url = "http://192.168.228.186:3000/api/v1/unoartimetico/importdb";
-		StringRequest request = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
-			@Override
-			public void onResponse(String response) {
-                System.out.println("Response: " + response);
-            }
-		}, new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-                //System.out.println("Algo salio mal.");
-				System.out.println(error.getLocalizedMessage());
-				error.printStackTrace();
-			}
-		}) {
-			@Override
-			protected Map<String, String> getParams() {
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("id_partida", String.valueOf(id_partida));
-				params.put("turno", String.valueOf(turno));
-				params.put("jugador", jugador);
-				params.put("color", color);
-				params.put("operacionMazo", operacionMazo);
-				params.put("operacionJugada", operacionJugada);
-				params.put("valor", valor);
-				params.put("id_dispositivo", android_id);
-				System.out.println(params);
-				return params;
-			}
-		};
-		requestQueue.add(request);
-	}
-
 	//Recibe objeto gson
 
     public void exportarBaseDatos(String parametros) {
@@ -277,7 +242,6 @@ public class ScreenMain implements Screen {
 		}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				//System.out.println("Algo salio mal.");
 				System.out.println(error.getLocalizedMessage());
 				error.printStackTrace();
 			}

@@ -171,7 +171,6 @@ public class ScreenJuego implements Screen {
 
     public static void crearMarcadorSiNoExiste(int numMarcadoresNecesarios) {
         if (marcadorJugador1 == null) {
-
             marcadorJugador1 = new InputScreenJuego(AtsUtil.batch, 7.5f, 3f);
             Gdx.input.setInputProcessor(marcadorJugador1);
         }
@@ -186,7 +185,7 @@ public class ScreenJuego implements Screen {
 
         if (numMarcadoresNecesarios > 2) {//jugaran 3
             if (marcadorJugador3 == null) {
-                marcadorJugador3 = new InputScreenJuego(AtsUtil.batch, 5.5f, 5.0f);
+                marcadorJugador3 = new InputScreenJuego(AtsUtil.batch, 5f, 5.0f);
                 Gdx.input.setInputProcessor(marcadorJugador3);
                 marcadorJugador3.setRotarPosicion(true);
                 marcadorJugador3.setGradosRotacion(270);
@@ -227,6 +226,8 @@ public class ScreenJuego implements Screen {
     }
 
     private static final int NUM_DIGITOS = 9;
+    private static final int PRIMER_DIGITO = 0;
+    private static final int SEGUNDO_DIGITO = 1;
 
     /**
      * @param marcadorJugador Es el marcador actual del jugador.
@@ -239,12 +240,23 @@ public class ScreenJuego implements Screen {
     public static void actualizarMarcador(InputScreenJuego marcadorJugador, int puntuacion) {
         marcadorJugador.limpiarTexto();
 
-        if (puntuacion > NUM_DIGITOS) {
-            marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(0));//Primer digito
-            marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(1));//Segundo digito.
-        } else
-            marcadorJugador.llenar_texto((char) ('0' + puntuacion));
-    }
+        if (puntuacion <= NUM_DIGITOS) {
+            // marcadorJugador.llenar_texto((char) ('0' + puntuacion));
+            marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(PRIMER_DIGITO));
+        } else {
+            if (marcadorJugador.isRotarPosicion() && marcadorJugador.getGradosRotacion() != 90) {//Que esté rotado 90 grados, significa que es el marcador del jugador 4.
+
+                marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(SEGUNDO_DIGITO));//Primer digito.
+                marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(PRIMER_DIGITO));//Segundo digito
+
+            } else {
+
+                marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(PRIMER_DIGITO));//Primer digito
+                marcadorJugador.llenar_texto(Integer.toString(puntuacion).charAt(SEGUNDO_DIGITO));//Segundo digito.
+
+            }
+        }
+    }//fin de actualizarMarcador.
 
 
     @Override
