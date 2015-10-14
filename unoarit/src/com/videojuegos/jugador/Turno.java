@@ -158,7 +158,7 @@ public class Turno {
         Juego.turnoDB++;
         //Se agregan los datos a la tabla y se imprime el movimiento
         db.agregarTurno(new DBTurno(Juego.idPartidaDB, Juego.turnoDB, getP().getCorreo(),
-                Juego.colorDB, operacionMazo, operacionJugada, valor, tiempoTardadoEnMoverCarta));
+                color, operacionMazo, operacionJugada, valor, tiempoTardadoEnMoverCarta));
 
         String jugada = "Número de Partida: " + Juego.idPartidaDB
                 + ", Turno: " + Juego.turnoDB + ", Jugador: " + getP().getCorreo()
