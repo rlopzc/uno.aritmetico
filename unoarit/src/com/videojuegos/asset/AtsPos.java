@@ -186,7 +186,7 @@ public class AtsPos {
 
     //Cuando escoja una carta después de haber tirado un comodín, aparece una pantalla con las opciones de las cartas a escoger
     //estas son las coordenadas de las opciones:
-    public static final float carta_amarilla_comodin_posx = 3.42f;
+    public static final float carta_amarilla_comodin_posx = 3.2f;
     public static final float carta_amarilla_comodin_posy = 6.7f;
 
     public static final float carta_azul_comodin_posx = 5.31f;
@@ -198,8 +198,8 @@ public class AtsPos {
     public static final float carta_morado_comodin_posx = 9.41f;
     public static final float carta_morado_comodin_posy = 3.96f;
 
-    public static final float carta_verde_comodin_posx = 11.25f;
-    public static final float carta_verde_comodin_posy = 6.67f;
+    public static final float carta_verde_comodin_posx = 11.75f;
+    public static final float carta_verde_comodin_posy = 7f;
 
     /*
 
