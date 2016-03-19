@@ -43,6 +43,8 @@ public class ScreenJuego implements Screen {
     public ScreenJuego(int numJug, ArrayList<String> jugadores) {
         try {
             juego = new Juego(numJug, jugadores);
+            crearMarcadorSiNoExiste(numJug);
+            iniciarMarcador('0');
         } catch (Exception e) {
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
         }

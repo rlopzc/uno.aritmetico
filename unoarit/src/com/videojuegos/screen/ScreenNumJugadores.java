@@ -29,18 +29,24 @@ public class ScreenNumJugadores implements Screen {
     @Override
     public void render(float delta) {
         if (btndos.meTocaste()) {
+            listener = new AtsInputListener(2);
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay2);
-            AtsScreens.screenJuego = new ScreenJuego(2);
+            AtsScreens.screenJuego = new ScreenJuego(2, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
             return;
         } else if (btntres.meTocaste()) {
+            listener = new AtsInputListener(3);
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay3);
-            AtsScreens.screenJuego = new ScreenJuego(3);
+            AtsScreens.screenJuego = new ScreenJuego(3, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
             return;
         } else if (btncuatro.meTocaste()) {
+            listener = new AtsInputListener(4);
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay4);
-            AtsScreens.screenJuego = new ScreenJuego(4);
+            AtsScreens.screenJuego = new ScreenJuego(4, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
             return;
         } else if (btnAtras.meTocaste()) {
@@ -104,6 +110,7 @@ public class ScreenNumJugadores implements Screen {
     private class AtsInputListener implements Input.TextInputListener {
 
         private int numJug = 0;
+        private int currentPlayer = 1;
 
         public AtsInputListener(int numJug) {
             this.numJug = numJug;
@@ -118,7 +125,9 @@ public class ScreenNumJugadores implements Screen {
         public void input(String correo) {
             if (!esCorreo(correo)) {
                 AtsSound.sonarSound(AtsSound.incorrecto);
+                Gdx.input.getTextInput(listener, "Ingresa correo del Jugador " + currentPlayer, "");
             } else {
+                currentPlayer++;
                 AtsSound.sonarSound(AtsSound.correcto);
                 agregaJugador(correo);
                 if (numJug == 2) {

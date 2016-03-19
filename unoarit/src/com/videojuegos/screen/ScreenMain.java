@@ -60,8 +60,9 @@ public class ScreenMain implements Screen {
 			AtsUtil.mismoDispositivo = false;
 			listener = new AtsInputListener();
 			AtsUtil.setBackground(Load.backgroundplay1);
-			AtsScreens.screenJuego = new ScreenJuego(2);
-			AtsUtil.game.setScreen(AtsScreens.screenJuego);
+			Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
+//			AtsScreens.screenJuego = new ScreenJuego(2, emailsJugadores);
+//			AtsUtil.game.setScreen(AtsScreens.screenJuego);
 			return;
 		} else if (btnMultiPlayer.meTocaste()) {
 			AtsUtil.machine = false;
@@ -181,15 +182,16 @@ public class ScreenMain implements Screen {
 		 */
 		@Override
 		public void input(String correo) {
-//			if(!esCorreo(correo)) {
-//				AtsSound.sonarSound(AtsSound.incorrecto);
-//			} else {
+			if(!esCorreo(correo)) {
+				AtsSound.sonarSound(AtsSound.incorrecto);
+                Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
+			} else {
 				AtsSound.sonarSound(AtsSound.correcto);
-//				agregaJugador(correo);
-//				AtsScreens.screenJuego = new ScreenJuego(2, emailsJugadores);
-				AtsScreens.screenJuego = new ScreenJuego(2);
+				agregaJugador(correo);
+				AtsScreens.screenJuego = new ScreenJuego(2, emailsJugadores);
+//				AtsScreens.screenJuego = new ScreenJuego(2);
 				AtsUtil.game.setScreen(AtsScreens.screenJuego);
-//			}
+			}
 		}
 
 		/**
