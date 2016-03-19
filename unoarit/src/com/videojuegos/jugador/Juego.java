@@ -67,12 +67,12 @@ public class Juego {
     }
 
     public Juego(int numJug, ArrayList<String> jugadores) {
-        Juego.numJug = numJug;
-        Juego.turno = 1;
-        Juego.idPartidaDB = db.asignarUltimoIdPartida();
-        Juego.turnoDB = 0;
-        Juego.colorDB = "";
-        Juego.valorDB = "";
+		Juego.numJug = numJug;
+		Juego.turno = 1;
+		Juego.turnoDB = 0;
+		Juego.colorDB = "";
+		Juego.valorDB = "";
+		Juego.idPartidaDB = db.asignarUltimoIdPartida();
 
         player = new ArrayList<Player>(numJug);
         centroCartaMazo = new ArrayList<Carta>();
@@ -80,12 +80,12 @@ public class Juego {
         btnMazo = new Boton(Load.mazoS, 7.5f, 5.0f, AtsPos.anchoCarta,
                 AtsPos.altoCarta, 0);
 
-        terminoJuego = false;
-        terminoTurno = false;
-        bloquear = false;
-        regresar = false;
-        masuno = false;
-        masdos = false;
+		terminoJuego = false;
+		terminoTurno = false;
+		bloquear = false;
+		regresar = false;
+		masuno = false;
+		masdos = false;
 
         Carta c = AtsTM.getCartaAleatoria(0, Bluetooth.bluetooth());
         addMazo(c);

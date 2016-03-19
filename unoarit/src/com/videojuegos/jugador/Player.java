@@ -326,10 +326,9 @@ public class Player {
      * la une con otra de color en el centro.
      */
     public void sumarPuntosPorColor() {
-        System.out.println("+1 punto");
         this.puntuacion++;
 
-        publicarMarcador();
+//        publicarMarcador();
     }
 
 
@@ -340,10 +339,9 @@ public class Player {
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 3+1
      */
     public void sumarPuntosPorOperacionSimple() {
-        System.out.println("+2 puntos");
         this.puntuacion += 2;
 
-        publicarMarcador();
+//        publicarMarcador();
     }
 
     /**
@@ -353,10 +351,9 @@ public class Player {
      * Ejemplo: De su mazo elije 2+2 y en el centro está la carta 8/2
      */
     public void sumarPuntosPorOperacionDoble() {
-        System.out.println("+3 puntos");
         this.puntuacion += 3;
 
-        publicarMarcador();
+//        publicarMarcador();
 
     }
 
