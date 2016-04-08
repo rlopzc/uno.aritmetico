@@ -31,21 +31,21 @@ public class ScreenNumJugadores implements Screen {
     public void render(float delta) {
         if (btndos.meTocaste()) {
             listener = new AtsInputListener(2);
-            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 2", "");
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay2);
             AtsScreens.screenJuego = new ScreenJuego(2, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
             return;
         } else if (btntres.meTocaste()) {
             listener = new AtsInputListener(3);
-            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 3", "");
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay3);
             AtsScreens.screenJuego = new ScreenJuego(3, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
             return;
         } else if (btncuatro.meTocaste()) {
             listener = new AtsInputListener(4);
-            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 4", "");
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay4);
             AtsScreens.screenJuego = new ScreenJuego(4, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
