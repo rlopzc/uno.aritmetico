@@ -35,21 +35,17 @@ public class InputScreenJuego implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        // TODO Auto-generated method stub
-        // System.out.println(keycode);
         if (keycode == Input.Keys.BACK) {
             AtsUtil.game.setScreen(AtsScreens.screenMain);
         }
         if (texto.size() >= 1) {
             if (keycode == 67) {
                 texto.remove(texto.size() - 1);
-                // System.out.println("despues"+texto.size());
             }
         }
         return true;
@@ -88,32 +84,27 @@ public class InputScreenJuego implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         Vector3 v = AtsTM.tocasteAqui();
-        // System.out.println("x = " + v.x + "\n" + "y = " + v.y);
         return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean scrolled(int amount) {
-        // TODO Auto-generated method stub
         return false;
     }
 

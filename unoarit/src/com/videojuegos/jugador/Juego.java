@@ -38,8 +38,8 @@ public class Juego {
         Juego.valorDB = "";
         Juego.idPartidaDB = db.asignarUltimoIdPartida();
 
-        player = new ArrayList<Player>(numJug);
-        centroCartaMazo = new ArrayList<Carta>();
+        player = new ArrayList<>(numJug);
+        centroCartaMazo = new ArrayList<>();
         // Inicializamos el boton mazo
         btnMazo = new Boton(Load.mazoS, 7.5f, 5.0f, AtsPos.anchoCarta,
                 AtsPos.altoCarta, 0);
@@ -104,7 +104,7 @@ public class Juego {
             c.setJugador(0);
             c.setPosicion(AtsPos.centroX, AtsPos.centroY);
             centroCartaMazo.add(c);
-            // System.out.println("A�adido: " + c.getColor() + "\t" +
+            // System.out.println("Añadido: " + c.getColor() + "\t" +
             // c.getValor());
             centroCarta = centroCartaMazo.get(centroCartaMazo.size() - 1);
         } catch (Exception e) {

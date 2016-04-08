@@ -50,6 +50,7 @@ public class ScreenJuego implements Screen {
         }
     }
 
+
     public void setPlayers(ArrayList<Player> player) {
         this.player = player;
     }

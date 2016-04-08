@@ -9,6 +9,7 @@ import com.videojuegos.asset.AtsSound;
 import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
+import com.videojuegos.jugador.Player;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -63,7 +64,6 @@ public class ScreenNumJugadores implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -78,7 +78,6 @@ public class ScreenNumJugadores implements Screen {
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -114,7 +113,7 @@ public class ScreenNumJugadores implements Screen {
 
         public AtsInputListener(int numJug) {
             this.numJug = numJug;
-            emailsJugadores = new ArrayList<String>();
+            emailsJugadores = new ArrayList<>();
         }
 
         /**
