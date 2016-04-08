@@ -178,7 +178,6 @@ public class ScreenNumJugadores implements Screen {
 
         public void agregaJugador(String email) {
             emailsJugadores.add(email);
-            //System.out.println(emailsJugadores);
         }
 
         /**
