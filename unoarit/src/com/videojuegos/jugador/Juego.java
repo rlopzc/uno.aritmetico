@@ -90,11 +90,11 @@ public class Juego {
         addMazo(c);
 
         if (AtsUtil.machine) {
-            player.add(new Player(1, jugadores.get(0)));
-            player.add(new Player(2, "Maquina"));
+            player.add(new Player(1, "Player 1", jugadores.get(0)));
+            player.add(new Player(2, "Maquina", "Maquina"));
         } else {
             for (int i = 0; i < numJug; i++) {
-                player.add(new Player(i + 1, jugadores.get(i)));
+                player.add(new Player(i + 1, "Player " + (i+1), jugadores.get(i)));
             }
         }
     }
@@ -104,8 +104,6 @@ public class Juego {
             c.setJugador(0);
             c.setPosicion(AtsPos.centroX, AtsPos.centroY);
             centroCartaMazo.add(c);
-            // System.out.println("Añadido: " + c.getColor() + "\t" +
-            // c.getValor());
             centroCarta = centroCartaMazo.get(centroCartaMazo.size() - 1);
         } catch (Exception e) {
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
@@ -116,8 +114,6 @@ public class Juego {
         try {
             if (c.getValor() == DataCarta.cBase) {
                 centroCartaMazo.remove(c);
-                // System.out.println("Removido: " + c.getColor() + "\t" +
-                // c.getValor());
                 centroCarta = centroCartaMazo.get(centroCartaMazo.size() - 1);
             }
         } catch (Exception e) {

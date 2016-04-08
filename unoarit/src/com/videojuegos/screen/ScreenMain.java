@@ -70,10 +70,7 @@ public class ScreenMain implements Screen {
 			AtsUtil.game.setScreen(AtsScreens.screenMultiPlayer);
 			return;
 		} else if (btnsalir.meTocaste()) {
-			
 			Gdx.app.exit();
-			
-			
 			return;
 		}else if(btnAyuda.meTocaste()){
 			AtsUtil.game.setScreen(AtsScreens.screenAyuda);
