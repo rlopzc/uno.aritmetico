@@ -40,6 +40,13 @@ public class Player {
         inicializa();
     }
 
+    public Player(int id, String nombre, String correo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+        inicializa();
+    }
+
     private void inicializa() {
         this.index = 0;
         mazoPlayer = new ArrayList<Carta>();
@@ -328,7 +335,7 @@ public class Player {
     public void sumarPuntosPorColor() {
         this.puntuacion++;
 
-//        publicarMarcador();
+        publicarMarcador();
     }
 
 
@@ -341,7 +348,7 @@ public class Player {
     public void sumarPuntosPorOperacionSimple() {
         this.puntuacion += 2;
 
-//        publicarMarcador();
+        publicarMarcador();
     }
 
     /**
@@ -353,7 +360,7 @@ public class Player {
     public void sumarPuntosPorOperacionDoble() {
         this.puntuacion += 3;
 
-//        publicarMarcador();
+        publicarMarcador();
 
     }
 
@@ -367,11 +374,11 @@ public class Player {
 
     public void publicarMarcador() {
 
-        if (this.getCorreo().equalsIgnoreCase("Maquina") || this.getCorreo().equalsIgnoreCase("Player 2"))
+        if (this.getCorreo().equalsIgnoreCase("Maquina") || this.getNombre().equalsIgnoreCase("Player 2"))
             ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador2, this.obtenerPuntuacion());
-        else if (this.getCorreo().equalsIgnoreCase("Player 1"))
+        else if (this.getNombre().equalsIgnoreCase("Player 1"))
             ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador1, this.obtenerPuntuacion());
-        else if (this.getCorreo().equalsIgnoreCase("Player 3"))
+        else if (this.getNombre().equalsIgnoreCase("Player 3"))
             ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador3, this.obtenerPuntuacion());
         else
             ScreenJuego.actualizarMarcador(ScreenJuego.marcadorJugador4, this.obtenerPuntuacion());

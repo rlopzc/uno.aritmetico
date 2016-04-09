@@ -50,6 +50,7 @@ public class ScreenJuego implements Screen {
         }
     }
 
+
     public void setPlayers(ArrayList<Player> player) {
         this.player = player;
     }
@@ -195,7 +196,6 @@ public class ScreenJuego implements Screen {
 
             if (numMarcadoresNecesarios > 3) {//jugaran 4.
                 if (marcadorJugador4 == null) {
-
                     marcadorJugador4 = new InputScreenJuego(AtsUtil.batch, 9.5f, 5.0f);
                     Gdx.input.setInputProcessor(marcadorJugador4);
                     marcadorJugador4.setRotarPosicion(true);

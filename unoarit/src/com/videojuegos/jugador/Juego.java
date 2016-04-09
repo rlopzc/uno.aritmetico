@@ -38,8 +38,8 @@ public class Juego {
         Juego.valorDB = "";
         Juego.idPartidaDB = db.asignarUltimoIdPartida();
 
-        player = new ArrayList<Player>(numJug);
-        centroCartaMazo = new ArrayList<Carta>();
+        player = new ArrayList<>(numJug);
+        centroCartaMazo = new ArrayList<>();
         // Inicializamos el boton mazo
         btnMazo = new Boton(Load.mazoS, 7.5f, 5.0f, AtsPos.anchoCarta,
                 AtsPos.altoCarta, 0);
@@ -67,35 +67,34 @@ public class Juego {
     }
 
     public Juego(int numJug, ArrayList<String> jugadores) {
-		Juego.numJug = numJug;
-		Juego.turno = 1;
-		Juego.turnoDB = 0;
-		Juego.colorDB = "";
-		Juego.valorDB = "";
-		Juego.idPartidaDB = db.asignarUltimoIdPartida();
+        Juego.numJug = numJug;
+        Juego.turno = 1;
+        Juego.turnoDB = 0;
+        Juego.colorDB = "";
+        Juego.valorDB = "";
+        Juego.idPartidaDB = db.asignarUltimoIdPartida();
 
-        player = new ArrayList<Player>(numJug);
-        centroCartaMazo = new ArrayList<Carta>();
+        player = new ArrayList<>(numJug);
+        centroCartaMazo = new ArrayList<>();
         // Inicializamos el boton mazo
-        btnMazo = new Boton(Load.mazoS, 7.5f, 5.0f, AtsPos.anchoCarta,
-                AtsPos.altoCarta, 0);
+        btnMazo = new Boton(Load.mazoS, 7.5f, 5.0f, AtsPos.anchoCarta, AtsPos.altoCarta, 0);
 
-		terminoJuego = false;
-		terminoTurno = false;
-		bloquear = false;
-		regresar = false;
-		masuno = false;
-		masdos = false;
+        terminoJuego = false;
+        terminoTurno = false;
+        bloquear = false;
+        regresar = false;
+        masuno = false;
+        masdos = false;
 
         Carta c = AtsTM.getCartaAleatoria(0, Bluetooth.bluetooth());
         addMazo(c);
 
         if (AtsUtil.machine) {
-            player.add(new Player(1, jugadores.get(0)));
-            player.add(new Player(2, "Maquina"));
+            player.add(new Player(1, "Player 1", jugadores.get(0)));
+            player.add(new Player(2, "Maquina", "Maquina"));
         } else {
             for (int i = 0; i < numJug; i++) {
-                player.add(new Player(i + 1, jugadores.get(i)));
+                player.add(new Player(i + 1, "Player " + (i+1), jugadores.get(i)));
             }
         }
     }
@@ -105,8 +104,6 @@ public class Juego {
             c.setJugador(0);
             c.setPosicion(AtsPos.centroX, AtsPos.centroY);
             centroCartaMazo.add(c);
-            // System.out.println("A�adido: " + c.getColor() + "\t" +
-            // c.getValor());
             centroCarta = centroCartaMazo.get(centroCartaMazo.size() - 1);
         } catch (Exception e) {
             AtsUtil.game.setScreen(AtsScreens.screenNumPlayer);
@@ -117,8 +114,6 @@ public class Juego {
         try {
             if (c.getValor() == DataCarta.cBase) {
                 centroCartaMazo.remove(c);
-                // System.out.println("Removido: " + c.getColor() + "\t" +
-                // c.getValor());
                 centroCarta = centroCartaMazo.get(centroCartaMazo.size() - 1);
             }
         } catch (Exception e) {

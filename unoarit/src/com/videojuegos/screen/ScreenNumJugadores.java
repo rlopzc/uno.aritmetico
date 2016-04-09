@@ -9,6 +9,7 @@ import com.videojuegos.asset.AtsSound;
 import com.videojuegos.asset.AtsUtil;
 import com.videojuegos.asset.Load;
 import com.videojuegos.cartas.Boton;
+import com.videojuegos.jugador.Player;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -30,21 +31,21 @@ public class ScreenNumJugadores implements Screen {
     public void render(float delta) {
         if (btndos.meTocaste()) {
             listener = new AtsInputListener(2);
-            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 2", "");
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay2);
             AtsScreens.screenJuego = new ScreenJuego(2, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
             return;
         } else if (btntres.meTocaste()) {
             listener = new AtsInputListener(3);
-            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 3", "");
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay3);
             AtsScreens.screenJuego = new ScreenJuego(3, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
             return;
         } else if (btncuatro.meTocaste()) {
             listener = new AtsInputListener(4);
-            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 4", "");
+            Gdx.input.getTextInput(listener, "Ingresa correo del Jugador 1", "");
             AtsUtil.setBackground(Load.backgroundplay4);
             AtsScreens.screenJuego = new ScreenJuego(4, emailsJugadores);
             AtsUtil.game.setScreen(AtsScreens.screenJuego);
@@ -63,7 +64,6 @@ public class ScreenNumJugadores implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -78,7 +78,6 @@ public class ScreenNumJugadores implements Screen {
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -114,7 +113,7 @@ public class ScreenNumJugadores implements Screen {
 
         public AtsInputListener(int numJug) {
             this.numJug = numJug;
-            emailsJugadores = new ArrayList<String>();
+            emailsJugadores = new ArrayList<>();
         }
 
         /**
@@ -178,7 +177,6 @@ public class ScreenNumJugadores implements Screen {
 
         public void agregaJugador(String email) {
             emailsJugadores.add(email);
-            //System.out.println(emailsJugadores);
         }
 
         /**

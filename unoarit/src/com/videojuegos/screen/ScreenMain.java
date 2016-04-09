@@ -70,10 +70,7 @@ public class ScreenMain implements Screen {
 			AtsUtil.game.setScreen(AtsScreens.screenMultiPlayer);
 			return;
 		} else if (btnsalir.meTocaste()) {
-			
 			Gdx.app.exit();
-			
-			
 			return;
 		}else if(btnAyuda.meTocaste()){
 			AtsUtil.game.setScreen(AtsScreens.screenAyuda);
@@ -235,7 +232,7 @@ public class ScreenMain implements Screen {
 
     public void exportarBaseDatos(String parametros) {
         RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
-        String url = "http://192.168.231.80:3000/api/v1/uno_aritmetico/import_games";
+        String url = "http://192.168.229.153:3000/api/v1/uno_aritmetico/import_games";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {

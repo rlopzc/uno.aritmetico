@@ -98,7 +98,6 @@ public class Turno {
                     if (cc.getValor() == c.getValor()) {
                         if (c.getOperacion().equals(cc.getOperacion())) {
                             getP().sumarPuntosPorOperacionSimple();
-
                         } else {
                             getP().sumarPuntosPorOperacionDoble();
                         }
@@ -116,32 +115,25 @@ public class Turno {
                 } else if (cc.getValor() == c.getValor()) {
                     if (c.getOperacion().equals(cc.getOperacion())) {
                         getP().sumarPuntosPorOperacionSimple();
-
                     } else {
                         getP().sumarPuntosPorOperacionDoble();
-
                     }
                     segundos_final = System.currentTimeMillis();
                     save("no", cc.getOperacion(), c.getOperacion(), Integer.toString(c.getValor()), obtenerTiempoDelTurno());
-
                     return true;
                 }
             } else if (cc.getValor() == c.getValor()) {
                 getP().sumarPuntosPorColor();
                 segundos_final = System.currentTimeMillis();
-
                 return true;
             } else if ((c.getColor() == DataCarta.neg) || (cc.getColorComodin() == c.getColor())) {
                 segundos_final = System.currentTimeMillis();
-
                 return true;
             }
             segundos_final = System.currentTimeMillis();
-
-            return getP().getCorreo().equalsIgnoreCase("Maquina"); //return true.
+            return getP().getCorreo().equalsIgnoreCase("Maquina");
         }
         segundos_final = System.currentTimeMillis();
-
         return false;
     }
 
@@ -355,20 +347,20 @@ public class Turno {
      * @param m Movimiento
      *          <p>
      *          <pre>
-     *                                                                                    Realiza el movimiento de la carta seleccionada; si la carta no esta sobre
-     *                                                                                   otra carta o la carta no se encuentra sobre la carta del centro, entonces
-     *                                                                                   a la carta seleccionada se le asigna la posicision en pantalla en direcccion
-     *                                                                                   a donde la mueva el jugador; en caso de que la carta seleccionada se encuentre
-     *                                                                                   sobre la carta que se encuentra en el centro, entonces si el color
-     *                                                                                   o valor aritmetico de la carta seleccionada es igual al color, color comodin
-     *                                                                                   o valor aritmetico de la carta que se encuentra en el centro, entonces
-     *                                                                                   la carta seleccionada se convierte en la nueva carta del centro, se elimina del
-     *                                                                                   mazo del jugador en turno y se finaliza el turno del jugador actual; en caso
-     *                                                                                   contrario se emite un pitido y se reacomoda la carta en su lugar original.
-     *                                                                                   </pre>
+     *                                                                                             Realiza el movimiento de la carta seleccionada; si la carta no esta sobre
+     *                                                                                            otra carta o la carta no se encuentra sobre la carta del centro, entonces
+     *                                                                                            a la carta seleccionada se le asigna la posicision en pantalla en direcccion
+     *                                                                                            a donde la mueva el jugador; en caso de que la carta seleccionada se encuentre
+     *                                                                                            sobre la carta que se encuentra en el centro, entonces si el color
+     *                                                                                            o valor aritmetico de la carta seleccionada es igual al color, color comodin
+     *                                                                                            o valor aritmetico de la carta que se encuentra en el centro, entonces
+     *                                                                                            la carta seleccionada se convierte en la nueva carta del centro, se elimina del
+     *                                                                                            mazo del jugador en turno y se finaliza el turno del jugador actual; en caso
+     *                                                                                            contrario se emite un pitido y se reacomoda la carta en su lugar original.
+     *                                                                                            </pre>
      *
      *          <pre>     de la siguiente carta del centro y se finaliza el turno del jugador actual.
-     *                                                                                   </pre>
+     *                                                                                            </pre>
      */
 
     private static void moverCarta(Movimiento m) {

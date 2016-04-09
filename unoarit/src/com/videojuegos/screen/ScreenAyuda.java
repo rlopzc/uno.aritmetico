@@ -12,7 +12,7 @@ import com.videojuegos.cartas.Boton;
 
 
 /**
- * Aquí se pinta la pantalla de la Ayuda
+ * Aquï¿½ se pinta la pantalla de la Ayuda
  */
 
 public class ScreenAyuda implements Screen {
@@ -21,7 +21,7 @@ public class ScreenAyuda implements Screen {
 	private Ayuda ayuda;
 	private Boton btnAtras;
 	/**
-	 * Éste método pinta la pantalla de ayuda llamando al método 
+	 * ï¿½ste mÃ©todo pinta la pantalla de ayuda llamando al mÃ©todo
 	 * dibujarAyuda de la clase Ayuda y dibuja los botones
 	 * anterior, mostrar y siguiente, para animar la ayuda
 	 */
@@ -46,13 +46,13 @@ public class ScreenAyuda implements Screen {
 		try {
 			ayuda.dibujarAyuda(batch);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		batch.end();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 
 	}
 	/**
@@ -70,7 +70,6 @@ public class ScreenAyuda implements Screen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -80,7 +79,7 @@ public class ScreenAyuda implements Screen {
 	}
 
 	/** Inicializa los botones y sus posiciones de nuevo
-	 * cuando la aplicación ha sido interrumpida
+	 * cuando la aplicaciï¿½n ha sido interrumpida
 	 */
 	
 
